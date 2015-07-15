@@ -72,9 +72,12 @@ set number
 set pastetoggle=<F11>
 
 "Indentation settings
-set shiftwidth=4
-set softtabstop=4
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 set expandtab
+set autoindent
+set smartindent
 
 "save backup in different directory
 set backupdir=~/.vim/tmp/backup
@@ -87,3 +90,12 @@ set directory
 "save undo in different directory
 set undodir=~/.vim/tmp/undo
 set undofile
+
+"use shift+h/l to switch between tabs
+nnoremap <S-h> gT
+nnoremap <S-l> gt
+
+"Set color of tab bar
+hi TabLineFill ctermfg=Black ctermbg=DarkGreen
+hi TabLine ctermfg=Grey ctermbg=Black
+hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
