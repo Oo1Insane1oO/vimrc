@@ -11,11 +11,13 @@ Plugin 'gmarik/Vundle.vim'
 "let Vundle manage YouCompleteMe
 Plugin 'Valloric/YouCompleteMe'
 
+"let Vundle manage tagbar
+Plugin 'majutsushi/tagbar'
+
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
-"To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin indent on    " required To ignore plugin indent changes, instead use:
+filetype plugin on
 
 "Enable syntax highlighting
 syntax enable
@@ -46,6 +48,12 @@ set showcmd
 "Highlighted search
 set hlsearch
 
+"Turn hlsearch off when enter is clicked
+nnoremap <CR> :noh<CR><CR>
+
+"Incremental search
+set incsearch
+
 "Case insensitive search
 set ignorecase
 set smartcase
@@ -72,9 +80,9 @@ set number
 set pastetoggle=<F11>
 
 "Indentation settings
-set shiftwidth=2
-set tabstop=2
-set softtabstop=2
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 set expandtab
 set autoindent
 set smartindent
@@ -92,10 +100,26 @@ set undodir=~/.vim/tmp/undo
 set undofile
 
 "use shift+h/l to switch between tabs
-nnoremap <S-h> gT
-nnoremap <S-l> gt
+nnoremap <S-e> gT
+nnoremap <S-q> gt
 
 "Set color of tab bar
 hi TabLineFill ctermfg=Black ctermbg=DarkGreen
 hi TabLine ctermfg=Grey ctermbg=Black
 hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
+
+"use Alt+F9 to open tagbar
+nmap <A-F9> :TagbarToggle<CR>
+
+"set paste-toggle to leader(backslack)-z
+set pastetoggle=<leader>z
+
+"use ctrl+hjkl to shift panes
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+
+"use shift+j/k to move pages
+nnoremap <S-j> 
+nnoremap <S-k> 
