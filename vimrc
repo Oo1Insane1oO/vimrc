@@ -76,13 +76,23 @@ set cmdheight=2
 "Display line number
 set number
 
+
 "Disable TouchPad on startup, reenable on exit
 set mouse-=a
 autocmd VimEnter * !(xinput --disable 'SynPS/2 Synaptics TouchPad')
 autocmd VimLeave * !(xinput --enable 'SynPS/2 Synaptics TouchPad')
 
-"set f11 to pastetoggle
-set pastetoggle=<F11>
+"apply Touchpad behaviour on suspend
+function SetBPM(mode)
+    "(Re)Set Bracketed Paste Mode
+    execute "silent !echo -ne '\033[?2004" . a:mode . "'"
+endfunction
+function Ms(mode)
+    "set touchpad (mode=enable/disable)
+    execute "!(xinput --" . a:mode . " 'SynPS/2 Synaptics TouchPad')"
+endfunction
+" toggle BPM when suspending (hook ctrl-z)...
+nnoremap <silent> <C-z> :call SetBPM("l")<bar>:call Ms("enable")<CR>:suspend<bar>:call SetBPM("h")<bar>:call Ms("disable")<CR>
 
 "Indentation settings
 set shiftwidth=4
