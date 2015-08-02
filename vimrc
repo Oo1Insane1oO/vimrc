@@ -76,6 +76,11 @@ set cmdheight=2
 "Display line number
 set number
 
+"Disable TouchPad on startup, reenable on exit
+set mouse-=a
+autocmd VimEnter * !(xinput --disable 'SynPS/2 Synaptics TouchPad')
+autocmd VimLeave * !(xinput --enable 'SynPS/2 Synaptics TouchPad')
+
 "set f11 to pastetoggle
 set pastetoggle=<F11>
 
@@ -100,8 +105,8 @@ set undodir=~/.vim/tmp/undo
 set undofile
 
 "use shift+h/l to switch between tabs
-nnoremap <S-e> gT
-nnoremap <S-q> gt
+nnoremap <A-h> gT
+nnoremap <A-l> gt
 
 "Set color of tab bar
 hi TabLineFill ctermfg=Black ctermbg=DarkGreen
@@ -111,7 +116,7 @@ hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
 "use Alt+F9 to open tagbar
 nmap <A-F9> :TagbarToggle<CR>
 
-"set paste-toggle to leader(backslack)-z
+"set paste-toggle to leader(backslash)-z
 set pastetoggle=<leader>z
 
 "use ctrl+hjkl to shift panes
@@ -123,3 +128,8 @@ noremap <C-k> <C-w>k
 "use shift+j/k to move pages
 nnoremap <S-j> 
 nnoremap <S-k> 
+
+"use shift+h/l to move word
+nnoremap <S-h> b
+nnoremap <S-l> w
+nnoremap <S-h> b
