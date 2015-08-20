@@ -76,11 +76,10 @@ set cmdheight=2
 "Display line number
 set number
 
-
 "Disable TouchPad on startup, reenable on exit
 set mouse-=a
-autocmd VimEnter * !(xinput --disable 'SynPS/2 Synaptics TouchPad')
-autocmd VimLeave * !(xinput --enable 'SynPS/2 Synaptics TouchPad')
+autocmd VimEnter * silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
+autocmd VimLeave * silent !(xinput --enable 'SynPS/2 Synaptics TouchPad')
 
 "apply Touchpad behaviour on suspend
 function SetBPM(mode)
@@ -89,9 +88,10 @@ function SetBPM(mode)
 endfunction
 function Ms(mode)
     "set touchpad (mode=enable/disable)
-    execute "!(xinput --" . a:mode . " 'SynPS/2 Synaptics TouchPad')"
+    execute "silent !(xinput --" . a:mode . " 'SynPS/2 Synaptics TouchPad')"
 endfunction
-" toggle BPM when suspending (hook ctrl-z)...
+
+"Toggle BPM when suspending (hook ctrl-z)
 nnoremap <silent> <C-z> :call SetBPM("l")<bar>:call Ms("enable")<CR>:suspend<bar>:call SetBPM("h")<bar>:call Ms("disable")<CR>
 
 "Indentation settings
@@ -136,10 +136,42 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 
 "use shift+j/k to move pages
-nnoremap <S-j> 
-nnoremap <S-k> 
+nnoremap <S-k> 
+nnoremap <S-j> 
 
 "use shift+h/l to move word
 nnoremap <S-h> b
 nnoremap <S-l> w
-nnoremap <S-h> b
+
+"use standard commenting 
+let s:comment_map = {
+    \   "c": '// ',
+    \   "cpp": '// ',
+    \   "go": '// ',
+    \   "java": '// ',
+    \   "javascript": '// ',
+    \   "php": '// ',
+    \   "python": '# ',
+    \   "ruby": '# ',
+    \   "vim": '" ',
+    \ }
+
+"function for toggling comment 
+function! ToggleComment()
+    if has_key(s:comment_map, &filetype)
+        let comment_leader = s:comment_map[&filetype]
+        if getline('.') =~ "^" . comment_leader
+            " Uncomment the line
+            execute "silent s/^" . comment_leader . "//"
+        else
+            " Comment the line
+            execute "silent s/^/" . comment_leader . "/"
+        endif
+    else
+        echo "No comment leader found for filetype"
+    end
+endfunction
+
+"use leader(\)->Space to call ToggleComment 
+nnoremap <leader><Space> :call ToggleComment()<cr>
+vnoremap <leader><Space> :call ToggleComment()<cr>
