@@ -5,14 +5,11 @@ filetype off "required for Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-"let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-
-"let Vundle manage YouCompleteMe
 Plugin 'Valloric/YouCompleteMe'
-
-"let Vundle manage tagbar
 Plugin 'majutsushi/tagbar'
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -124,7 +121,7 @@ hi TabLine ctermfg=Grey ctermbg=Black
 hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
 
 "use Alt+F9 to open tagbar
-nmap <A-F9> :TagbarToggle<CR>
+nmap tt :TagbarToggle<CR>
 
 "set paste-toggle to leader(backslash)-z
 set pastetoggle=<leader>z
@@ -175,3 +172,14 @@ endfunction
 "use leader(\)->Space to call ToggleComment 
 nnoremap <leader><Space> :call ToggleComment()<cr>
 vnoremap <leader><Space> :call ToggleComment()<cr>
+
+"fix UltiSnippets
+let g:UltisnipsExpandTrigger="<CR>"
+let g:UltiSnipsJumpForwardTrigger="<S-b>"
+let g:UltiSnipsJumpBackwardTrigger="<S-z>"
+
+"set W as w in command mode
+cnoremap W w
+
+"set Q as q in command mode
+cnoremap Q q
