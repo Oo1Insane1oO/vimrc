@@ -178,6 +178,8 @@ let g:UltisnipsExpandTrigger="<CR>"
 let g:UltiSnipsJumpForwardTrigger="<S-b>"
 let g:UltiSnipsJumpBackwardTrigger="<S-z>"
 
+set shell=/bin/bash
+
 "set W as w in command mode
 cnoremap W w
 
