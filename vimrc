@@ -132,9 +132,11 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 
-"use shift+j/k to move pages
+"use shift+j/k to move pages in normal and visual mode
 nnoremap <S-k> 
 nnoremap <S-j> 
+vnoremap <S-k> 
+vnoremap <S-j> 
 
 "use shift+h/l to move word
 nnoremap <S-h> b
@@ -142,15 +144,16 @@ nnoremap <S-l> w
 
 "use standard commenting 
 let s:comment_map = {
-    \   "c": '// ',
-    \   "cpp": '// ',
-    \   "go": '// ',
-    \   "java": '// ',
-    \   "javascript": '// ',
-    \   "php": '// ',
+    \   "c": '\/\/ ',
+    \   "cpp": '\/\/ ',
+    \   "go": '\/\/ ',
+    \   "java": '\/\/ ',
+    \   "javascript": '\/\/ ',
+    \   "php": '\/\/ ',
     \   "python": '# ',
     \   "ruby": '# ',
     \   "vim": '" ',
+    \   "tex": '% ',
     \ }
 
 "function for toggling comment 
