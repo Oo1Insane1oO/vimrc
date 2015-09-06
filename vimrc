@@ -188,3 +188,6 @@ cnoremap W w
 
 "set Q as q in command mode
 cnoremap Q q
+
+"set <TAB><TAB> as additional 'ENTER'
+nmap <TAB><TAB> <CR>
