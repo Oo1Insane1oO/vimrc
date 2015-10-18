@@ -76,6 +76,9 @@ set number
 "Buffer screen updates (instead of all the time)
 set lazyredraw
 
+"fix slow tagbar
+autocmd FileType tagbar setlocal nocursorline nocursorcolumn
+
 "Disable TouchPad on startup, reenable on exit
 set mouse-=a
 autocmd VimEnter * silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
@@ -125,6 +128,8 @@ hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
 
 "use Alt+F9 to open tagbar
 nmap tt :TagbarToggle<CR>
+
+"remap next/previous tagbar
 
 "set paste-toggle to leader(backslash)-z
 set pastetoggle=<leader>z
@@ -197,3 +202,8 @@ cnoremap Q q
 
 "set <TAB><TAB> as additional 'ENTER'
 nmap <TAB><TAB> <CR>
+
+let currUser = substitute(system('whoami'), '\n', '', '')
+
+"set automatic preamble in .tex files (on linux)
+execute "autocmd BufNewFile *.tex :r /home/" . currUser . "/.vim/texPreamble"
