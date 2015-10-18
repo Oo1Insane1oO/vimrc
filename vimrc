@@ -73,6 +73,9 @@ set cmdheight=2
 "Display line number
 set number
 
+"Buffer screen updates (instead of all the time)
+set lazyredraw
+
 "Disable TouchPad on startup, reenable on exit
 set mouse-=a
 autocmd VimEnter * silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
@@ -138,9 +141,11 @@ nnoremap <S-j> 
 vnoremap <S-k> 
 vnoremap <S-j> 
 
-"use shift+h/l to move word
+"use shift+h/l to move word in normal and visual mode
 nnoremap <S-h> b
 nnoremap <S-l> w
+vnoremap <S-h> b
+vnoremap <S-l> w
 
 "use standard commenting 
 let s:comment_map = {
@@ -176,10 +181,11 @@ endfunction
 nnoremap <leader><Space> :call ToggleComment()<cr>
 vnoremap <leader><Space> :call ToggleComment()<cr>
 
-"fix UltiSnippets
-let g:UltisnipsExpandTrigger="<CR>"
-let g:UltiSnipsJumpForwardTrigger="<S-b>"
-let g:UltiSnipsJumpBackwardTrigger="<S-z>"
+"make ultisnips and YCM friends
+let g:ycm_key_list_select_completion = ['<tab>']
+let g:ycm_key_list_previous_completion = ['<S-tab>']
+let g:UltiSnipsExpandTrigger = "<C-y>"
+let g:UltiSnipsJumpForwardTrigger = "<cr>"
 
 set shell=/bin/bash
 
