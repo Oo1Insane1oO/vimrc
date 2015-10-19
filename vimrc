@@ -206,6 +206,7 @@ nmap <TAB><TAB> <CR>
 "set automatic preamble in .tex files (on linux)
 let currUser = substitute(system('whoami'), '\n', '', '')
 execute "autocmd BufNewFile *.tex :r /home/" . currUser . "/.vim/texPreamble"
+autocmd BufNewFile *.tex :set filetype=tex
 
 "set leader(\)->l to call pdflatex on current file (using pdflatex)
 nnoremap <leader>l :!pdflatex %<CR>
