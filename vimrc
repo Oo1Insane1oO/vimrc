@@ -189,8 +189,9 @@ vnoremap <leader><Space> :call ToggleComment()<cr>
 "make ultisnips and YCM friends
 let g:ycm_key_list_select_completion = ['<tab>']
 let g:ycm_key_list_previous_completion = ['<S-tab>']
-let g:UltiSnipsExpandTrigger = "<C-y>"
-let g:UltiSnipsJumpForwardTrigger = "<cr>"
+let g:UltiSnipsExpandTrigger = "<c-y>"
+let g:UltiSnipsJumpForwardTrigger = "<c-a>"
+let g:UltiSnipsJumpForwardTrigger = "<c-d>"
 
 set shell=/bin/bash
 
