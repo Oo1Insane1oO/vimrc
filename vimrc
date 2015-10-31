@@ -117,9 +117,6 @@ set directory
 set undodir=~/.vim/tmp/undo
 set undofile
 
-"use shift+h/l to switch between tabs
-nnoremap <A-h> gT
-nnoremap <A-l> gt
 
 "Set color of tab bar
 hi TabLineFill ctermfg=Black ctermbg=DarkGreen
@@ -129,10 +126,12 @@ hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
 "use Alt+F9 to open tagbar
 nmap tt :TagbarToggle<CR>
 
-"remap next/previous tagbar
-
 "set paste-toggle to leader(backslash)-z
 set pastetoggle=<leader>z
+
+"use shift+h/l to switch between tabs
+nnoremap <A-h> gT
+nnoremap <A-l> gt
 
 "use ctrl+hjkl to shift panes
 noremap <C-l> <C-w>l
@@ -151,6 +150,15 @@ nnoremap <S-h> b
 nnoremap <S-l> w
 vnoremap <S-h> b
 vnoremap <S-l> w
+
+"set W as w in command mode
+cnoremap W w
+
+"set Q as q in command mode
+cnoremap Q q
+
+"set <TAB><TAB> as additional 'ENTER'
+nmap <TAB><TAB> <CR>
 
 "use standard commenting 
 let s:comment_map = {
@@ -195,19 +203,24 @@ let g:UltiSnipsJumpForwardTrigger = "<c-d>"
 
 set shell=/bin/bash
 
-"set W as w in command mode
-cnoremap W w
-
-"set Q as q in command mode
-cnoremap Q q
-
-"set <TAB><TAB> as additional 'ENTER'
-nmap <TAB><TAB> <CR>
+"function to find current user
+function! GetUser()
+    let currUser = substitute(system('whoami'), '\n', '', '')
+    return currUser
+endfunction
 
 "set automatic preamble in .tex files (on linux)
-let currUser = substitute(system('whoami'), '\n', '', '')
+let currUser = GetUser()
 execute "autocmd BufNewFile *.tex :r /home/" . currUser . "/.vim/texPreamble"
 autocmd BufNewFile *.tex :set filetype=tex
 
 "set leader(\)->l to call pdflatex on current file (using pdflatex)
 nnoremap <leader>l :!pdflatex %<CR>
+
+"function for cleaning temp-files
+function! CleanTemp()
+    let currUser = GetUser()
+    execute "silent !(rm /home/" . currUser . "/.vim/tmp/backup/*)"
+    execute "silent !(rm /home/" . currUser . "/.vim/tmp/swap/*)"
+    execute "silent !(rm /home/" . currUser . "/.vim/tmp/undo/*)"
+endfunction
