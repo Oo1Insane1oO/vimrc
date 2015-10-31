@@ -172,6 +172,7 @@ let s:comment_map = {
     \   "ruby": '# ',
     \   "vim": '" ',
     \   "tex": '% ',
+    \   "lisp": '; ',
     \ }
 
 "function for toggling comment 
