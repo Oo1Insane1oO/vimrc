@@ -200,7 +200,7 @@ let g:ycm_key_list_select_completion = ['<tab>']
 let g:ycm_key_list_previous_completion = ['<S-tab>']
 let g:UltiSnipsExpandTrigger = "<c-y>"
 let g:UltiSnipsJumpForwardTrigger = "<c-a>"
-let g:UltiSnipsJumpForwardTrigger = "<c-d>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-d>"
 
 set shell=/bin/bash
 
@@ -216,7 +216,11 @@ execute "autocmd BufNewFile *.tex :r /home/" . currUser . "/.vim/texPreamble"
 autocmd BufNewFile *.tex :set filetype=tex
 
 "set leader(\)->l to call pdflatex on current file (using pdflatex)
-nnoremap <leader>l :!pdflatex %<CR>
+function! CompileTex()
+    " function for running pdflatex silent
+    execute "!(pdflatex -shell-escape -interaction=nonstopmode -file-line-error % | egrep -i '*:[0-9]*:.*\|error\|undefined')"
+endfunction
+nnoremap <leader>l :call CompileTex()<CR>
 
 "function for cleaning temp-files
 function! CleanTemp()
