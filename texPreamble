@@ -134,6 +134,10 @@
 \newcommand{\ecp}[1]{\left< {#1} \right>} %expected value
 \newcommand{\urw}{\uparrow} % up arrow
 \newcommand{\drw}{\downarrow} % up arrow
+\newcommand{\pt}[1]{\textbf{\txtit{#1}}\justify}
+\newcommand{\infint}{\int\limits^{\infty}_{-\infty}}
+\newcommand{\oinfint}{\int\limits^{\infty}_0}
+\newcommand{\sint}{\int\limits^{2\pi}_0\int\limits^{\pi}_0\oinfint}
 
 \begin{document}
 \thispagestyle{empty}
