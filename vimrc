@@ -81,21 +81,21 @@ autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 
 "Disable TouchPad on startup, reenable on exit
 set mouse-=a
-" autocmd VimEnter * silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
-" autocmd VimLeave * silent !(xinput --enable 'SynPS/2 Synaptics TouchPad')
-" 
-" "apply Touchpad behaviour on suspend
-" function SetBPM(mode)
-"     "(Re)Set Bracketed Paste Mode
-"     execute "silent !echo -ne '\033[?2004" . a:mode . "'"
-" endfunction
-" function Ms(mode)
-"     "set touchpad (mode=enable/disable)
-"     execute "silent !(xinput --" . a:mode . " 'SynPS/2 Synaptics TouchPad')"
-" endfunction
-" 
-" "Toggle BPM when suspending (hook ctrl-z)
-" nnoremap <silent> <C-z> :call SetBPM("l")<bar>:call Ms("enable")<CR>:suspend<bar>:call SetBPM("h")<bar>:call Ms("disable")<CR>
+autocmd VimEnter * silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
+autocmd VimLeave * silent !(xinput --enable 'SynPS/2 Synaptics TouchPad')
+
+"apply Touchpad behaviour on suspend
+function SetBPM(mode)
+    "(Re)Set Bracketed Paste Mode
+    execute "silent !echo -ne '\033[?2004" . a:mode . "'"
+endfunction
+function Ms(mode)
+    "set touchpad (mode=enable/disable)
+    execute "silent !(xinput --" . a:mode . " 'SynPS/2 Synaptics TouchPad')"
+endfunction
+
+"Toggle BPM when suspending (hook ctrl-z)
+nnoremap <silent> <C-z> :call SetBPM("l")<bar>:call Ms("enable")<CR>:suspend<bar>:call SetBPM("h")<bar>:call Ms("disable")<CR>
 
 "Indentation settings
 set shiftwidth=4

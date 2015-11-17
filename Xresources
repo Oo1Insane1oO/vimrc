@@ -1,0 +1,6 @@
+XTerm*font: *-fixed-*-*-*-15-*
+XTerm*renderFont:true
+XTerm*faceName: VeraMono
+XTerm*faceSize: 10
+XTerm*loginshell: true
+XTerm*savelines: 16384
