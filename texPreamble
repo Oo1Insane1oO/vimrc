@@ -100,6 +100,7 @@
         \justify
         \label{fig:#4}
     \end{figure}
+    \justify
 } %one figure {filename}{caption}
 \newcommand{\twofigure}[7]{
     \begin{figure}[H]
@@ -149,5 +150,6 @@
 \end{center}
 
 \clearpage
+\setcounter{page}{1}
 
 \end{document}
