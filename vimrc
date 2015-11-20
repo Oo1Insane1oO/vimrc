@@ -24,8 +24,15 @@ set background=dark
 
 "Set colorscheme
 set t_Co=256
-"colorscheme solarized
-colorscheme molokai
+" colorscheme molokai
+colorscheme Tomorrow-Night-Eighties
+" colorscheme Tomorrow-Night-Bright
+" colorscheme dante 
+" colorscheme wombat256i
+" colorscheme colorful256
+" colorscheme denim
+" colorscheme colorzone
+" colorscheme harlequin
 
 "Determine filetype and enable auto-indent
 filetype indent plugin on
@@ -85,12 +92,12 @@ autocmd VimEnter * silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
 autocmd VimLeave * silent !(xinput --enable 'SynPS/2 Synaptics TouchPad')
 
 "apply Touchpad behaviour on suspend
-function SetBPM(mode)
-    "(Re)Set Bracketed Paste Mode
+function! SetBPM(mode)
+"     "(Re)Set Bracketed Paste Mode
     execute "silent !echo -ne '\033[?2004" . a:mode . "'"
 endfunction
-function Ms(mode)
-    "set touchpad (mode=enable/disable)
+function! Ms(mode)
+"     "set touchpad (mode=enable/disable)
     execute "silent !(xinput --" . a:mode . " 'SynPS/2 Synaptics TouchPad')"
 endfunction
 
@@ -173,6 +180,7 @@ let s:comment_map = {
     \   "vim": '" ',
     \   "tex": '% ',
     \   "lisp": '; ',
+    \   "zsh": '# ',
     \ }
 
 "function for toggling comment 
