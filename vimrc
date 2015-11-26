@@ -24,15 +24,8 @@ set background=dark
 
 "Set colorscheme
 set t_Co=256
-" colorscheme molokai
-colorscheme Tomorrow-Night-Eighties
-" colorscheme Tomorrow-Night-Bright
-" colorscheme dante 
-" colorscheme wombat256i
-" colorscheme colorful256
-" colorscheme denim
-" colorscheme colorzone
-" colorscheme harlequin
+colorscheme molokai
+autocmd BufNewFile,BufRead *.tex colorscheme meta5
 
 "Determine filetype and enable auto-indent
 filetype indent plugin on
@@ -87,9 +80,9 @@ set lazyredraw
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 
 "Disable TouchPad on startup, reenable on exit
-set mouse-=a
-autocmd VimEnter * silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
-autocmd VimLeave * silent !(xinput --enable 'SynPS/2 Synaptics TouchPad')
+" set mouse-=a
+" autocmd VimEnter * silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
+" autocmd VimLeave * silent !(xinput --enable 'SynPS/2 Synaptics TouchPad')
 
 "apply Touchpad behaviour on suspend
 function! SetBPM(mode)
@@ -102,7 +95,7 @@ function! Ms(mode)
 endfunction
 
 "Toggle BPM when suspending (hook ctrl-z)
-nnoremap <silent> <C-z> :call SetBPM("l")<bar>:call Ms("enable")<CR>:suspend<bar>:call SetBPM("h")<bar>:call Ms("disable")<CR>
+" nnoremap <silent> <C-z> :call SetBPM("l")<bar>:call Ms("enable")<CR>:suspend<bar>:call SetBPM("h")<bar>:call Ms("disable")<CR>
 
 "Indentation settings
 set shiftwidth=4
