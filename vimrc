@@ -25,7 +25,8 @@ set background=dark
 
 "Set colorscheme
 set t_Co=256
-colorscheme molokai
+" colorscheme onedark
+colorscheme harlequin
 autocmd BufNewFile,BufRead *.tex colorscheme meta5
 
 "Determine filetype and enable auto-indent
@@ -198,11 +199,17 @@ nnoremap <leader><Space> :call ToggleComment()<cr>
 vnoremap <leader><Space> :call ToggleComment()<cr>
 
 "make ultisnips and YCM friends
-let g:ycm_key_list_select_completion = ['<tab>']
-let g:ycm_key_list_previous_completion = ['<S-tab>']
-let g:UltiSnipsExpandTrigger = "<c-y>"
-let g:UltiSnipsJumpForwardTrigger = "<c-a>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-d>"
+let g:UltiSnipsExpandTrigger = "<nop>"
+let g:ulti_expand_or_jump_res = 0
+function ExpandSnippetOrCarriageReturn()
+    let snippet = UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+        return snippet
+    else
+        return "\<CR>"
+    endif
+endfunction
+inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 
 set shell=/bin/bash
 
