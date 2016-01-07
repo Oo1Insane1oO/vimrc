@@ -27,6 +27,7 @@ set background=dark
 set t_Co=256
 " colorscheme onedark
 colorscheme harlequin
+let g:currColo = g:colors_name
 autocmd BufNewFile,BufRead *.tex colorscheme meta5
 
 "Determine filetype and enable auto-indent
@@ -82,22 +83,30 @@ set lazyredraw
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 
 "Disable TouchPad on startup, reenable on exit
-" set mouse-=a
-" autocmd VimEnter * silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
-" autocmd VimLeave * silent !(xinput --enable 'SynPS/2 Synaptics TouchPad')
+set mouse-=a
+autocmd VimEnter * silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
+autocmd VimLeave * silent !(xinput --enable 'SynPS/2 Synaptics TouchPad')
 
 "apply Touchpad behaviour on suspend
 function! SetBPM(mode)
 "     "(Re)Set Bracketed Paste Mode
     execute "silent !echo -ne '\033[?2004" . a:mode . "'"
 endfunction
+
 function! Ms(mode)
-"     "set touchpad (mode=enable/disable)
+    "set touchpad (mode=enable/disable)
     execute "silent !(xinput --" . a:mode . " 'SynPS/2 Synaptics TouchPad')"
 endfunction
 
+function! SetColor(currC)
+    " set colorscheme (to be used with setBPM and Ms)
+    execute "silent colorscheme " . a:currC
+endfunction
+
 "Toggle BPM when suspending (hook ctrl-z)
-" nnoremap <silent> <C-z> :call SetBPM("l")<bar>:call Ms("enable")<CR>:suspend<bar>:call SetBPM("h")<bar>:call Ms("disable")<CR>
+nnoremap <silent> <C-z> :call SetBPM("l")<bar>:call Ms("enable")<CR>
+            \:suspend<bar>:call SetBPM("h")<bar>:call Ms("disable")<CR>
+            \:call SetColor(g:currColo)<CR>
 
 "Indentation settings
 set shiftwidth=4
@@ -201,7 +210,7 @@ vnoremap <leader><Space> :call ToggleComment()<cr>
 "make ultisnips and YCM friends
 let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
-function ExpandSnippetOrCarriageReturn()
+function! ExpandSnippetOrCarriageReturn()
     let snippet = UltiSnips#ExpandSnippetOrJump()
     if g:ulti_expand_or_jump_res > 0
         return snippet
