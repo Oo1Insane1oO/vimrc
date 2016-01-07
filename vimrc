@@ -27,8 +27,8 @@ set background=dark
 set t_Co=256
 " colorscheme onedark
 colorscheme harlequin
-autocmd BufNewFile,BufRead *.tex colorscheme meta5
 let g:currColo = g:colors_name
+autocmd BufNewFile,BufRead *.tex colorscheme meta5 | let g:currColo = g:colors_name
 
 "Determine filetype and enable auto-indent
 filetype indent plugin on
