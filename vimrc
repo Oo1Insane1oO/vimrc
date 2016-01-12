@@ -79,8 +79,15 @@ set number
 "Buffer screen updates (instead of all the time)
 set lazyredraw
 
+"set clipboard options
+set clipboard+=unnamed
+set go+=a
+
 "fix slow tagbar
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
+
+"close preview window after autocomplete
+autocmd CompleteDone * pclose
 
 "Disable TouchPad on startup, reenable on exit
 set mouse-=a
@@ -127,7 +134,6 @@ set directory
 "save undo in different directory
 set undodir=~/.vim/tmp/undo
 set undofile
-
 
 "Set color of tab bar
 hi TabLineFill ctermfg=Black ctermbg=DarkGreen
