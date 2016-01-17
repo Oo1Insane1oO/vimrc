@@ -27,8 +27,21 @@ set background=dark
 set t_Co=256
 " colorscheme onedark
 colorscheme harlequin
-let g:currColo = g:colors_name
-autocmd BufNewFile,BufRead *.tex colorscheme meta5 | let g:currColo = g:colors_name
+let g:globalColor = g:colors_name
+autocmd BufNewFile,BufRead *.tex colorscheme meta5 | let g:texColor = g:colors_name
+
+" function for setting color
+function! SetColor()
+    " set colorscheme (to be used with setBPM and Ms)
+    if &filetype == 'tex'
+        execute "silent colorscheme " . g:texColor
+    else
+        execute "silent colorscheme " . g:globalColor
+    endif
+endfunction
+
+" call SetColor on entering a new tab
+autocmd TabEnter * :call SetColor()
 
 "Determine filetype and enable auto-indent
 filetype indent plugin on
@@ -91,29 +104,27 @@ autocmd CompleteDone * pclose
 
 "Disable TouchPad on startup, reenable on exit
 set mouse-=a
-autocmd VimEnter * silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
-autocmd VimLeave * silent !(xinput --enable 'SynPS/2 Synaptics TouchPad')
+" autocmd VimEnter * :silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
+" autocmd VimLeave * :silent !(xinput --enable 'SynPS/2 Synaptics TouchPad')
+
+autocmd VimEnter * : !(xinput list | if grep -i 'TouchPad'; then xinput --disable 'SynPS/2 Synaptics TouchPad'; fi)
+autocmd VimLeave * : !(xinput list | if grep -i 'TouchPad'; then xinput --enable 'SynPS/2 Synaptics TouchPad'; fi)
 
 "apply Touchpad behaviour on suspend
 function! SetBPM(mode)
-"     "(Re)Set Bracketed Paste Mode
+    "(Re)Set Bracketed Paste Mode
     execute "silent !echo -ne '\033[?2004" . a:mode . "'"
 endfunction
 
 function! Ms(mode)
     "set touchpad (mode=enable/disable)
-    execute "silent !(xinput --" . a:mode . " 'SynPS/2 Synaptics TouchPad')"
-endfunction
-
-function! SetColor(currC)
-    " set colorscheme (to be used with setBPM and Ms)
-    execute "silent colorscheme " . a:currC
+    execute "silent !(xinput list | if grep -i 'TouchPad'; then xinput --" . a:mode . " 'SynPS/2 Synaptics TouchPad'; fi)"
 endfunction
 
 "Toggle BPM when suspending (hook ctrl-z)
 nnoremap <silent> <C-z> :call SetBPM("l")<bar>:call Ms("enable")<CR>
             \:suspend<bar>:call SetBPM("h")<bar>:call Ms("disable")<CR>
-            \:call SetColor(g:currColo)<CR>
+            \:call SetColor()<CR>
 
 "Indentation settings
 set shiftwidth=4
