@@ -67,6 +67,9 @@ nnoremap <CR> :noh<CR><CR>
 "Incremental search
 set incsearch
 
+"Disable auto commenting
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 "Case insensitive search
 set ignorecase
 set smartcase
@@ -104,11 +107,9 @@ autocmd CompleteDone * pclose
 
 "Disable TouchPad on startup, reenable on exit
 set mouse-=a
-" autocmd VimEnter * :silent !(xinput --disable 'SynPS/2 Synaptics TouchPad')
-" autocmd VimLeave * :silent !(xinput --enable 'SynPS/2 Synaptics TouchPad')
 
-autocmd VimEnter * : !(xinput list | if grep -i 'TouchPad'; then xinput --disable 'SynPS/2 Synaptics TouchPad'; fi)
-autocmd VimLeave * : !(xinput list | if grep -i 'TouchPad'; then xinput --enable 'SynPS/2 Synaptics TouchPad'; fi)
+autocmd VimEnter * :silent !(xinput list | if grep -i 'TouchPad'; then xinput --disable 'SynPS/2 Synaptics TouchPad'; fi)
+autocmd VimLeave * :silent !(xinput list | if grep -i 'TouchPad'; then xinput --enable 'SynPS/2 Synaptics TouchPad'; fi)
 
 "apply Touchpad behaviour on suspend
 function! SetBPM(mode)
@@ -255,7 +256,7 @@ function! CompileTex()
     " function for running pdflatex silent
     execute "!(pdflatex -shell-escape -interaction=nonstopmode -file-line-error % | egrep -i '*:[0-9]*:.*\|error\|undefined')"
 endfunction
-nnoremap <leader>l :call CompileTex()<CR>
+nnoremap <leader>l :call CompileTex()<CR> :"!\<CR>"
 
 "function for cleaning temp-files
 function! CleanTemp()
