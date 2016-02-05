@@ -99,6 +99,10 @@ set lazyredraw
 set clipboard+=unnamed
 set go+=a
 
+" open new splits to right and bottom
+set splitright
+set splitbelow
+
 "fix slow tagbar
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 
