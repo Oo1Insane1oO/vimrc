@@ -1,9 +1,11 @@
 \documentclass[a4paper, hidelinks, 10pt]{article}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[expert]{mathdesign}
 \usepackage{listings}
 \usepackage[pdftex]{graphicx}
 \usepackage{color}
-\usepackage{amsmath}
+\usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage[margin=0.7in]{geometry}
 \usepackage{hyperref}
