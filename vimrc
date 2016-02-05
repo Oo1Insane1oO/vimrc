@@ -260,7 +260,7 @@ function! CompileTex()
     " function for running pdflatex silent
     execute "!(pdflatex -shell-escape -interaction=nonstopmode -file-line-error % | egrep -i '*:[0-9]*:.*\|error\|undefined')"
 endfunction
-nnoremap <leader>l :call CompileTex()<CR> :"!\<CR>"
+nnoremap <leader>l :call CompileTex()<CR>
 
 "function for cleaning temp-files
 function! CleanTemp()
