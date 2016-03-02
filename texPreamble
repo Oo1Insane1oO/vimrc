@@ -23,6 +23,7 @@
 \usepackage{tikz}
 \usepackage{etoolbox}
 \usepackage{fancyhdr}
+%\usepackage{fouriernc}
 
 %specific reused text
 \newcommand{\mdate}{}
@@ -41,7 +42,7 @@
 % \rfoot{}
 
 %renew title numbering
-\renewcommand{\thesection}{Problem \alph{section}.)}
+\renewcommand{\thesection}{Problem \arabic{section}}
 \renewcommand{\thesubsection}{\thesection\alph{subsection}}
 
 %center title and subtitle
@@ -99,10 +100,9 @@
         \textbf{{#1}}\\
         \includegraphics[scale=0.65]{{#2}}
         \caption{{#3}}
-        \justify
         \label{fig:#4}
     \end{figure}
-    \justify
+    \justifying
 } %one figure {filename}{caption}
 \newcommand{\twofigure}[7]{
     \begin{figure}[H]
