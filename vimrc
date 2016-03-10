@@ -269,3 +269,6 @@ function! CleanTemp()
     execute "silent !(rm /home/" . currUser . "/.vim/tmp/swap/*)"
     execute "silent !(rm /home/" . currUser . "/.vim/tmp/undo/*)"
 endfunction
+
+"map <ctrl-ctrl> to copy to clipboard using xclip
+vnoremap <C>p :w !xclip -i -sel c<CR><CR>
