@@ -132,7 +132,7 @@
 \newcommand{\me}{\mathrm{e}} %straight e for exp
 \newcommand{\md}{\mathrm{d}} %straight d for differential
 \newcommand{\mRe}[1]{\mathrm{Re}\left({#1}\right)}%nice real
-\newcommand{\munit}[1]{\ensuremath{\, \mathrm{#1}}} %straight units in math
+\newcommand{\munit}[1]{\;\ensuremath{\, \mathrm{#1}}} %straight units in math
 \newcommand{\Rarr}{\Rightarrow} %reduce lenght of Rightarrow (less to write)
 \newcommand{\ecp}[1]{\left< {#1} \right>} %expected value
 \newcommand{\urw}{\uparrow} % up arrow
