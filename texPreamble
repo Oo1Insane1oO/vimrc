@@ -141,6 +141,9 @@
 \newcommand{\infint}{\int\limits^{\infty}_{-\infty}}
 \newcommand{\oinfint}{\int\limits^{\infty}_0}
 \newcommand{\sint}{\int\limits^{2\pi}_0\int\limits^{\pi}_0\oinfint}
+\newcommand{\arcsinh}[1]{\text{arcsinh}\left(#1\right)}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
 \makeatletter
 % define a macro \Autoref to allow multiple references to be passed to \autoref
