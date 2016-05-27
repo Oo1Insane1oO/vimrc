@@ -166,11 +166,13 @@ set pastetoggle=<leader>z
 nnoremap <A-h> gT
 nnoremap <A-l> gt
 
-"use ctrl+hjkl to shift panes
-noremap <C-l> <C-w>l
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
+"use ctrl+po to shift panes
+unmap <C-l>
+unmap <C-h>
+noremap <C-p> <C-w>l
+noremap <C-o> <C-w>h
+" noremap <C-j> <C-w>j
+" noremap <C-k> <C-w>k
 
 "use shift+j/k to move pages in normal and visual mode
 nnoremap <S-k> 
@@ -183,6 +185,10 @@ nnoremap <S-h> b
 nnoremap <S-l> w
 vnoremap <S-h> b
 vnoremap <S-l> w
+
+"use ctrl+j/k to move window one line
+nnoremap <C-j> <C-e>
+nnoremap <C-k> <C-y>
 
 "set W as w in command mode
 cnoremap W w
