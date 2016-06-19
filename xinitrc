@@ -1,1 +1,2 @@
 "xrdb ~/.Xresources"
+xmodmap .xmodmap
