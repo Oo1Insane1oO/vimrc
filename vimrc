@@ -281,17 +281,20 @@ function! GetTexDir()
 endfunction
 
 "set leader(\)->l to call pdflatex on current file (using pdflatex)
-function! CompileTex(currDir)
+let g:dirTest = "none"
+let g:locCurrDir = FindCurrDir()
+let g:texDir = "none"
+function! CompileTex()
     " function for running pdflatex silent
     let locCurrDir = "none"
-    if a:currDir == "none"
-        let locCurrDir = FindCurrDir()
+    if g:dirTest == "none"
+        let g:texDir = GetTexDir()
+        let g:dirTest = "notNone"
     endif
-    let texDirectory = locCurrDir . "/" . GetTexDir()
+    let texDirectory = g:locCurrDir . "/" . g:texDir
     execute "!(pdflatex -output-directory " . texDirectory . " -shell-escape -interaction=nonstopmode -file-line-error % | egrep -i '*:[0-9]*:.*\|error\|undefined')"
 endfunction
-let currDir = "none"
-nnoremap <leader>l :call CompileTex(currDir)<CR>
+nnoremap <leader>l :call CompileTex()<CR>
 
 "function for cleaning temp-files
 function! CleanTemp()
