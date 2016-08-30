@@ -37,8 +37,10 @@ let g:gruvbox_contrast_dark = "medium"
 function! SetColor()
     " set colorscheme (to be used with setBPM and Ms)
     if &filetype == 'tex'
+        set background=dark
         execute "silent colorscheme " . g:texColor
     else
+        set background=dark
         execute "silent colorscheme " . g:globalColor
     endif
 endfunction
@@ -264,12 +266,32 @@ let currUser = GetUser()
 execute "autocmd BufNewFile *.tex :r /home/" . currUser . "/.vim/texPreamble"
 autocmd BufNewFile *.tex :set filetype=tex
 
-"set leader(\)->l to call pdflatex on current file (using pdflatex)
-function! CompileTex()
-    " function for running pdflatex silent
-    execute "!(pdflatex -shell-escape -interaction=nonstopmode -file-line-error % | egrep -i '*:[0-9]*:.*\|error\|undefined')"
+"function for setting tex directory
+function! FindCurrDir()
+    let currDir = getcwd()
+    return currDir
 endfunction
-nnoremap <leader>l :call CompileTex()<CR>
+
+"function for setting specific tex directory
+function! GetTexDir()
+    let curLine = getline('.')
+    call inputsave()
+    let specDir = input('Enter tex dir: ')
+    return specDir
+endfunction
+
+"set leader(\)->l to call pdflatex on current file (using pdflatex)
+function! CompileTex(currDir)
+    " function for running pdflatex silent
+    let locCurrDir = "none"
+    if a:currDir == "none"
+        let locCurrDir = FindCurrDir()
+    endif
+    let texDirectory = locCurrDir . "/" . GetTexDir()
+    execute "!(pdflatex -output-directory " . texDirectory . " -shell-escape -interaction=nonstopmode -file-line-error % | egrep -i '*:[0-9]*:.*\|error\|undefined')"
+endfunction
+let currDir = "none"
+nnoremap <leader>l :call CompileTex(currDir)<CR>
 
 "function for cleaning temp-files
 function! CleanTemp()
