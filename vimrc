@@ -296,6 +296,11 @@ function! CompileTex()
 endfunction
 nnoremap <leader>l :call CompileTex()<CR>
 
+"function for resetting directory variable
+function! ReInitDir()
+    let g:dirTest = "none"
+endfunction
+
 "function for cleaning temp-files
 function! CleanTemp()
     let currUser = GetUser()
