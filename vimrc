@@ -33,6 +33,9 @@ autocmd BufNewFile,BufRead *.tex colorscheme meta5 | let g:texColor = g:colors_n
 " gruvbox configuration
 let g:gruvbox_contrast_dark = "medium"
 
+" Enable buffer list from airline
+let g:airline#extensions#tabline#enabled = 1
+
 " function for setting color
 function! SetColor()
     " set colorscheme (to be used with setBPM and Ms)
@@ -252,6 +255,10 @@ function! ExpandSnippetOrCarriageReturn()
     endif
 endfunction
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+
+"use python3 interpreter
+" let g:ycm_server_python_interpreter = 'usr/bin/python3'
+" let g:ycm_python_binary_path = '/usr/local/bin/python3'
 
 set shell=/bin/bash
 
