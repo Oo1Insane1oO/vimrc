@@ -174,11 +174,11 @@ set pastetoggle=<leader>z
 nnoremap <A-h> gT
 nnoremap <A-l> gt
 
-"use ctrl+po to shift panes
+"use ctrl+po to cycle through panes
 unmap <C-l>
 unmap <C-h>
-noremap <C-p> <C-w>l
-noremap <C-o> <C-w>h
+noremap <C-p> <C-w>wl
+noremap <C-o> <C-w>Wh
 " noremap <C-j> <C-w>j
 " noremap <C-k> <C-w>k
 
@@ -318,3 +318,5 @@ endfunction
 
 "map <ctrl-ctrl> to copy to clipboard using xclip
 vnoremap <C>p :w !xclip -i -sel c<CR><CR>
+
+"map <leader>+/- to resize window up/down
