@@ -26,10 +26,10 @@
 %\usepackage{fouriernc}
 
 %specific reused text
-\newcommand{\mdate}{}
-\newcommand{\mtitle}{}
-\newcommand{\mauthor}{}
-\newcommand{\massignn}{}
+\newcommand{\mdate}{.}
+\newcommand{\mtitle}{.}
+\newcommand{\mauthor}{.}
+\newcommand{\massignn}{.}
 
 \pagestyle{fancy}
 \fancyhf{}
