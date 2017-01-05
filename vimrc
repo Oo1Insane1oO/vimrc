@@ -318,3 +318,7 @@ endfunction
 
 "map <ctrl-ctrl> to copy to clipboard using xclip
 vnoremap <C>yc :w !xclip -i -sel c<CR><CR>
+
+"map <S-insert> to xterm
+map <S-Insert> <MiddleMouse>
+map! <S-Insert> <MiddleMouse>
