@@ -177,8 +177,8 @@ nnoremap <A-l> gt
 "use ctrl+po to cycle through panes
 unmap <C-l>
 unmap <C-h>
-noremap <C-o> <C-w>wl
-noremap <C-p> <C-w>Wh
+noremap <C-p> <C-w>wl
+noremap <C-o> <C-w>Wh
 " noremap <C-j> <C-w>j
 " noremap <C-k> <C-w>k
 
