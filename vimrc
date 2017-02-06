@@ -171,14 +171,14 @@ nmap tt :TagbarToggle<CR>
 set pastetoggle=<leader>z
 
 "use shift+h/l to switch between tabs
-unmap <C-l>
-unmap <C-h>
-nnoremap <C-h> gT
-nnoremap <C-l> gt
+nnoremap <C-o> gT
+nnoremap <C-p> gt
 
 "use ctrl+po to cycle through panes
-noremap <C-p> <C-w>wl
-noremap <C-o> <C-w>Wh
+unmap <C-l>
+unmap <C-h>
+noremap <C-h> <C-w>Wh
+noremap <C-l> <C-w>wl
 " noremap <C-j> <C-w>j
 " noremap <C-k> <C-w>k
 
