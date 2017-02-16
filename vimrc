@@ -164,7 +164,7 @@ hi TabLineFill ctermfg=Black ctermbg=DarkGreen
 hi TabLine ctermfg=Grey ctermbg=Black
 hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
 
-"use Alt+F9 to open tagbar
+"use tt to open tagbar
 nmap tt :TagbarToggle<CR>
 
 "set paste-toggle to leader(backslash)-z
@@ -321,3 +321,9 @@ vnoremap <C>yc :w !xclip -i -sel c<CR><CR>
 
 "map <S-insert> to xterm
 map <S-Insert> <MiddleMouse>
+
+"map increase/decrease width/height to Ctrl/Shift++/-
+map <S-Left> :vertical resize +5<CR>
+map <S-Right> :vertical resize -5<CR>
+map <S-Up> :resize +5<CR>
+map <S-Down> :resize -5<CR>
