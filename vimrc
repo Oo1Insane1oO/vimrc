@@ -221,6 +221,7 @@ let s:comment_map = {
     \   "tex": '% ',
     \   "lisp": '; ',
     \   "zsh": '# ',
+    \   "lammps": '# ',
     \ }
 
 "function for toggling comment 
