@@ -125,8 +125,7 @@
 } %two figure one-line {title}{file1}{caption1}{file2}{caption2}
 
 \newcommand{\prtl}{\mathrm{\partial}} %reduce length of partial (less to write)
-\newcommand{\fprd}[3][]{\frac{\prtl^{#1}{#2}}{\prtl{#3}^{#1}}}
-\newcommand{\prd}[2][]{\frac{\prtl^{#1}}{\prtl{#2}^{#1}}}
+\NewDocumentCommand{\prd}{m O{} O{}}{\frac{\prtl^{#3}{#2}}{\prtl{#1}^{#3}}}
 \newcommand{\vsp}{\vspace{0.2cm}} %small vertical space
 \newcommand{\txtit}[1]{\textit{{#1}}} %italic text
 \newcommand{\blds}[1]{\boldsymbol{{#1}}} % better bold in mathmode (from amsmath)
