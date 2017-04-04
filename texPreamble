@@ -124,7 +124,9 @@
     \end{figure}
 } %two figure one-line {title}{file1}{caption1}{file2}{caption2}
 
-\newcommand{\prtl}{\partial} %reduce length of partial (less to write)
+\newcommand{\prtl}{\mathrm{\partial}} %reduce length of partial (less to write)
+\newcommand{\fprd}[3][]{\frac{\prtl^{#1}{#2}}{\prtl{#3}^{#1}}}
+\newcommand{\prd}[2][]{\frac{\prtl^{#1}}{\prtl{#2}^{#1}}}
 \newcommand{\vsp}{\vspace{0.2cm}} %small vertical space
 \newcommand{\txtit}[1]{\textit{{#1}}} %italic text
 \newcommand{\blds}[1]{\boldsymbol{{#1}}} % better bold in mathmode (from amsmath)
@@ -134,6 +136,7 @@
 \newcommand{\mRe}[1]{\mathrm{Re}\left({#1}\right)}%nice real
 \newcommand{\munit}[1]{\;\ensuremath{\, \mathrm{#1}}} %straight units in math
 \newcommand{\Rarr}{\Rightarrow} %reduce lenght of Rightarrow (less to write)
+\newcommand{\rarr}{\rightarrow} %reduce lenght of rightarrow (less to write)
 \newcommand{\ecp}[1]{\left< {#1} \right>} %expected value
 \newcommand{\urw}{\uparrow} % up arrow
 \newcommand{\drw}{\downarrow} % up arrow
@@ -142,6 +145,8 @@
 \newcommand{\oinfint}{\int\limits^{\infty}_0}
 \newcommand{\sint}{\int\limits^{2\pi}_0\int\limits^{\pi}_0\oinfint}
 \newcommand{\arcsinh}[1]{\text{arcsinh}\left(#1\right)}
+\newcommand{\I}{\scalebox{1.2}{$\mathds{1}$}}
+\newcommand{\veps}{\varepsilon} %\varepsilon is to long :P
 
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
 
