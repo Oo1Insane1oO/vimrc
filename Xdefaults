@@ -1,0 +1,57 @@
+!URxvt.font:             xft:Bitstream Vera Sans Mono:pixelsize=12
+URxvt.font:                 xft:DejaVu Sans Mono:pixelsize=12
+URxvt.letterSpace:          -1
+URxvt.termName:             rxvt
+URxvt.scrollBar:            false
+URxvt.scrollBar_right:      false
+URxvt.scrollBar_floating:   false
+URxvt.geometry:             240x84
+URxvt.borderless:           1
+URxvt.perl-lib:             /usr/lib/urxvt/perl/
+URxvt.perl-ext-common:      default,matcher
+URxvt.urlLauncher:          /usr/bin/jumanji
+URxvt.matcher.button:       1
+URxvt.iconFile:             ~/Pictures/rxvt.png
+URxvt.background:           #000000
+URxvt.foreground:           #cccccc
+URxvt.fading:               30
+URxvt.fadeColor:            #000000
+URxvt.depth:                32
+URxvt.background:           rgba:0000/0000/0200/c800
+
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.hinting:    full
+
+!URxvt.color0:       #2E3436
+!URxvt.color1:       #a40000
+!URxvt.color2:       #4E9A06
+!URxvt.color3:       #C4A000
+!URxvt.color5:       #75507B
+!URxvt.color6:       #ce5c00
+!URxvt.color7:       #babdb9
+!
+!URxvt.color8:       #555753
+!URxvt.color9:       #EF2929
+!URxvt.color10:      #8AE234
+!URxvt.color11:      #FCE94F
+!URxvt.color13:      #AD7FA8
+!URxvt.color14:      #fcaf3e
+!URxvt.color15:      #EEEEEC
+
+URxvt.color0:       #000000
+URxvt.color8:       #8b8f93
+URxvt.color1:       #dc74d1
+URxvt.color9:       #dc74d1
+URxvt.color2:       #0eb8c7
+URxvt.color10:      #0eb8c7
+URxvt.color3:       #dfe37e
+URxvt.color11:      #dfe37e
+URxvt.color4:       #3465A4
+URxvt.color12:      #729FCF
+URxvt.color5:       #9e88f0
+URxvt.color13:      #9e88f0
+URxvt.color6:       #73f7ff
+URxvt.color14:      #73f7ff
+URxvt.color7:       #e1dddd
+URxvt.color15:      #e1dddd
