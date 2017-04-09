@@ -148,15 +148,15 @@ set autoindent
 set smartindent
 
 "save backup in different directory
-set backupdir=~/.vim/tmp/backup
+set backupdir=~/.vim/tmp/backup/
 set backup
 
 "save swap in different directory
-set directory=~/.vim/tmp/swap
+set directory=~/.vim/tmp/swap/
 set directory
 
 "save undo in different directory
-set undodir=~/.vim/tmp/undo
+set undodir=~/.vim/tmp/undo/
 set undofile
 
 "Set color of tab bar
@@ -175,8 +175,6 @@ nnoremap <C-o> gT
 nnoremap <C-p> gt
 
 "use ctrl+po to cycle through panes
-unmap <C-l>
-unmap <C-h>
 noremap <C-h> <C-w>Wh
 noremap <C-l> <C-w>wl
 " noremap <C-j> <C-w>j
