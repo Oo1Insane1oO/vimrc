@@ -326,3 +326,6 @@ map <S-Left> :vertical resize +5<CR>
 map <S-Right> :vertical resize -5<CR>
 map <S-Up> :resize +5<CR>
 map <S-Down> :resize -5<CR>
+
+"map ge to expand line
+vnoremap ge :%j<CR>
