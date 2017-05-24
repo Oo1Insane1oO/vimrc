@@ -167,6 +167,9 @@ hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
 "use tt to open tagbar
 nmap tt :TagbarToggle<CR>
 
+"use Tab-+t to jump to tagbar
+nnoremap <Tab>t :TagbarOpen fj<CR>
+
 "set paste-toggle to leader(backslash)-z
 set pastetoggle=<leader>z
 
