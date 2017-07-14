@@ -119,9 +119,8 @@ autocmd CompleteDone * pclose
 
 "Disable TouchPad on startup, reenable on exit
 set mouse-=a
-
-autocmd VimEnter * :silent !(xinput list | if grep -i 'TouchPad'; then xinput --disable 'SynPS/2 Synaptics TouchPad'; fi)
-autocmd VimLeave * :silent !(xinput list | if grep -i 'TouchPad'; then xinput --enable 'SynPS/2 Synaptics TouchPad'; fi)
+autocmd VimEnter * :silent !(xinput list | if grep -i 'TouchPad'; then xinput --disable  $(xinput list | grep -i Touchpad | cut -d = -f2 | sed 's/[slave].*//' | sed 's/[^0-9]//g'); fi)
+autocmd VimLeave * :silent !(xinput list | if grep -i 'TouchPad'; then xinput --enable $(xinput list | grep -i Touchpad | cut -d = -f2 | sed 's/[slave].*//' | sed 's/[^0-9]//g'); fi)
 
 "apply Touchpad behaviour on suspend
 function! SetBPM(mode)
@@ -131,7 +130,7 @@ endfunction
 
 function! Ms(mode)
     "set touchpad (mode=enable/disable)
-    execute "silent !(xinput list | if grep -i 'TouchPad'; then xinput --" . a:mode . " 'SynPS/2 Synaptics TouchPad'; fi)"
+    execute "silent !(xinput list | if grep -i 'TouchPad'; then xinput --" . a:mode . " $(xinput list | grep -i Touchpad | cut -d = -f2 | sed 's/[slave].*//' | sed 's/[^0-9]//g'); fi)"
 endfunction
 
 "Toggle BPM when suspending (hook ctrl-z)
