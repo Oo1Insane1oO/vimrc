@@ -147,16 +147,16 @@ set autoindent
 set smartindent
 
 "save backup in different directory
-set backupdir=~/.vim/tmp/backup/
-set backup
+silent set backupdir=~/.vim/tmp/backup/
+silent set backup
 
 "save swap in different directory
-set directory=~/.vim/tmp/swap/
-set directory
+silent set directory=~/.vim/tmp/swap/
+silent set directory
 
 "save undo in different directory
-set undodir=~/.vim/tmp/undo/
-set undofile
+silent set undodir=~/.vim/tmp/undo/
+silent set undofile
 
 "Set color of tab bar
 hi TabLineFill ctermfg=Black ctermbg=DarkGreen
@@ -172,11 +172,11 @@ nnoremap <Tab>t :TagbarOpen fj<CR>
 "set paste-toggle to leader(backslash)-z
 set pastetoggle=<leader>z
 
-"use shift+h/l to switch between tabs
+"use ctrl+h/l to switch between tabs
 nnoremap <C-o> gT
 nnoremap <C-p> gt
 
-"use ctrl+po to cycle through panes
+"use ctrl+p/o to cycle through panes
 noremap <C-h> <C-w>Wh
 noremap <C-l> <C-w>wl
 " noremap <C-j> <C-w>j
@@ -324,10 +324,10 @@ vnoremap <C>yc :w !xclip -i -sel c<CR><CR>
 map <S-Insert> <MiddleMouse>
 
 "map increase/decrease width/height to Ctrl/Shift++/-
-map <S-Left> :vertical resize +5<CR>
-map <S-Right> :vertical resize -5<CR>
-map <S-Up> :resize +5<CR>
-map <S-Down> :resize -5<CR>
+map <C-Left> :vertical resize +5<CR>
+map <C-Right> :vertical resize -5<CR>
+map <C-Up> :resize +5<CR>
+map <C-Down> :resize -5<CR>
 
 "map ge to expand line
 vnoremap ge :%j<CR>
