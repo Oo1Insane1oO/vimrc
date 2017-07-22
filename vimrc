@@ -190,6 +190,9 @@ noremap <C-l> <C-w>wl
 " noremap <C-j> <C-w>j
 " noremap <C-k> <C-w>k
 
+" make saving easier
+cnoremap W<CR> w<CR>
+
 "use shift+j/k to move pages in normal and visual mode
 nnoremap <S-k> 
 nnoremap <S-j> 
