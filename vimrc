@@ -206,12 +206,6 @@ vnoremap <S-l> w
 nnoremap <C-j> <C-e>
 nnoremap <C-k> <C-y>
 
-"set W as w in command mode
-cnoremap W w
-
-"set Q as q in command mode
-cnoremap Q q
-
 "set <TAB><TAB> as additional 'ENTER'
 nmap <TAB><TAB> <CR>
 
