@@ -12,6 +12,7 @@ Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -164,11 +165,17 @@ hi TabLineFill ctermfg=Black ctermbg=DarkGreen
 hi TabLine ctermfg=Grey ctermbg=Black
 hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
 
-"use tt to open tagbar
-nmap tt :TagbarToggle<CR>
+"use tt to toggle tagbar
+nmap <Space><Space> :TagbarToggle<CR>
 
-"use Tab-+t to jump to tagbar
-nnoremap <Tab>t :TagbarOpen fj<CR>
+"use Tab+space-space to toggle NERDtree
+nmap <Tab><Space> :NERDTreeToggle<CR>
+
+"use Space+t to jump to tagbar
+nnoremap <Space>t :TagbarOpen fj<CR>
+
+"use shift+Tab+t to jump to NERDtree
+nnoremap <Tab><Space>t :NERDTreeCWD<CR>
 
 "set paste-toggle to leader(backslash)-z
 set pastetoggle=<leader>z
