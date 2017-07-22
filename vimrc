@@ -11,6 +11,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdtree'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
