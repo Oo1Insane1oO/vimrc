@@ -336,3 +336,38 @@ map <C-Down> :resize -5<CR>
 
 "map ge to expand line
 vnoremap ge :%j<CR>
+
+"list of file extentions with headers
+let s:extensions = {
+    \   '.cpp' : '.h',
+    \   '.h' : '.cpp',
+    \ }
+
+"set extension of current file
+"function! ToggleHeaderSource()
+"    let l:extension = "." . expand('%:e')
+"    let l:list = ['']
+"    for a:k in keys(s:extensions)
+"       call add(l:list,  system("find . -name " . expand('%:t:r') . a:k))
+"    endfor
+"    for a:i in l:list
+"        if a:i =~ s:extensions[l:extension]
+"            execute "e ". a:i
+"            break
+"        endif
+"    endfor
+"endfunction
+
+function! ToggleHeaderSource()
+    let l:path = expand('%:h') . '/'
+    let l:filename = expand('%:t:r')
+    let l:extension = expand('%:e')
+    if  l:extension == "h"
+        execute "e " . l:path . l:filename . ".cpp"
+    elseif l:extension == "cpp"
+        execute "e " . l:path . l:filename . ".h"
+    endif
+endfunction
+
+"map ToggleHeaderSource to <leader>s
+map <leader>s :call ToggleHeaderSource()<CR>
