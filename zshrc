@@ -87,3 +87,6 @@ alias fenicsproject="~/.local/bin/fenicsproject"
 alias python="/usr/bin/python2"
 alias qtcreator="/opt/Qt/Tools/QtCreator/bin/qtcreator"
 source .fenics.dev
+
+bindkey "^[l" forward-word
+bindkey "^[h" backward-word
