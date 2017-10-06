@@ -59,6 +59,9 @@ filetype indent plugin on
 "Enable Syntax highlighting
 syntax on
 
+"make default tex view to latex rather then plainlatex
+let g:tex_flavor = "latex"
+
 "Awesomeness
 set hidden
 
