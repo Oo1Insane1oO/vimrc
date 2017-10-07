@@ -296,6 +296,14 @@ function! GetTexDir()
     return specDir
 endfunction
 
+"function for setting specific tex file (split compile) 
+function! GetTexFile()
+    let curLine = getline('.')
+    call inputsave()
+    let specFile = input('Enter tex file: ')
+    return specFile
+endfunction
+
 "set leader(\)->l to call pdflatex on current file (using pdflatex)
 let g:dirTest = "none"
 let g:locCurrDir = FindCurrDir()
@@ -305,10 +313,11 @@ function! CompileTex()
     let locCurrDir = "none"
     if g:dirTest == "none"
         let g:texDir = GetTexDir()
+        let g:texFile = GetTexFile()
         let g:dirTest = "notNone"
     endif
     let texDirectory = g:locCurrDir . "/" . g:texDir
-    execute "!(pdflatex -output-directory " . texDirectory . " -shell-escape -interaction=nonstopmode -file-line-error % | egrep -i '*:[0-9]*:.*\|error\|undefined')"
+    execute "!(pdflatex -output-directory " . texDirectory . " -shell-escape -interaction=nonstopmode -file-line-error " . g:texFile . " | egrep -i '*:[0-9]*:.*\|error\|undefined')"
 endfunction
 nnoremap <leader>l :call CompileTex()<CR>
 
