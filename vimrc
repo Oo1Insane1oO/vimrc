@@ -13,6 +13,9 @@ Plugin 'honza/vim-snippets'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'joshdick/onedark.vim'
+Plugin 'morhetz/gruvbox'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -188,10 +191,10 @@ nnoremap <C-o> gT
 nnoremap <C-p> gt
 
 "use ctrl+p/o to cycle through panes
-noremap <C-h> <C-w>Wh
-noremap <C-l> <C-w>wl
-" noremap <C-j> <C-w>j
-" noremap <C-k> <C-w>k
+noremap <C-h> <C-w>h
+noremap <C-l> <C-w>l
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
 
 " make saving easier
 cnoremap W<CR> w<CR>
@@ -209,8 +212,8 @@ vnoremap <S-h> b
 vnoremap <S-l> w
 
 "use ctrl+j/k to move window one line
-nnoremap <C-j> <C-e>
-nnoremap <C-k> <C-y>
+" nnoremap <C-j> <C-e>
+" nnoremap <C-k> <C-y>
 
 "set <TAB><TAB> as additional 'ENTER'
 nmap <TAB><TAB> <CR>
@@ -268,6 +271,9 @@ inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" 
 "use python3 interpreter
 " let g:ycm_server_python_interpreter = 'usr/bin/python3'
 " let g:ycm_python_binary_path = '/usr/local/bin/python3'
+
+"YCM semantic support
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_global_ycm_extra_conf.py'
 
 set shell=/bin/bash
 
@@ -340,11 +346,11 @@ vnoremap <C>yc :w !xclip -i -sel c<CR><CR>
 "map <S-insert> to xterm
 map <S-Insert> <MiddleMouse>
 
-"map increase/decrease width/height to Ctrl/Shift++/-
-map <C-Left> :vertical resize +5<CR>
-map <C-Right> :vertical resize -5<CR>
-map <C-Up> :resize +5<CR>
-map <C-Down> :resize -5<CR>
+"map increase/decrease width/height to Ctrl+arrows
+map <C-left> :vertical resize +5<CR>
+map <C-right> :vertical resize -5<CR>
+map <C-up> :resize +5<CR>
+map <C-down> :resize -5<CR>
 
 "map ge to expand line
 vnoremap ge :%j<CR>
