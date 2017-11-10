@@ -233,6 +233,7 @@ let s:comment_map = {
     \   "lisp": '; ',
     \   "zsh": '# ',
     \   "lammps": '# ',
+    \   "yaml": '# ',
     \ }
 
 "function for toggling comment 
