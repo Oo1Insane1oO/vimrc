@@ -16,6 +16,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'joshdick/onedark.vim'
 Plugin 'morhetz/gruvbox'
+Plugin 'christophermca/meta5'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -323,8 +324,8 @@ function! CompileTex()
         let g:texFile = GetTexFile()
         let g:dirTest = "notNone"
     endif
-    let texDirectory = g:locCurrDir . "/" . g:texDir
-    execute "!(pdflatex -output-directory " . texDirectory . " -shell-escape -interaction=nonstopmode -file-line-error " . g:texFile . " | egrep -i '*:[0-9]*:.*\|error\|undefined')"
+    let texDirectory = g:texDir
+    execute "!(latexmk -pdf --jobname=" . texDirectory . "/" . g:texFile . " --shell-escape --interaction=nonstopmode --file-line-error " .  texDirectory . "/" . g:texFile . " | egrep -i '*:[0-9]*:.*\|error\|undefined')"
 endfunction
 nnoremap <leader>l :call CompileTex()<CR>
 
