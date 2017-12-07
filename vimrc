@@ -11,12 +11,14 @@ Plugin 'majutsushi/tagbar'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'joshdick/onedark.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'christophermca/meta5'
+Plugin 'AlessandroYorba/Libertine'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -42,6 +44,9 @@ let g:gruvbox_contrast_dark = "medium"
 
 " Enable buffer list from airline
 let g:airline#extensions#tabline#enabled = 1
+
+" set airline theme
+let g:airline_theme="onedark"
 
 " function for setting color
 function! SetColor()
