@@ -35,6 +35,7 @@ set t_Co=256
 colorscheme gruvbox 
 let g:globalColor = g:colors_name
 autocmd BufNewFile,BufRead *.tex colorscheme meta5 | let g:texColor = g:colors_name
+autocmd BufNewFile,BufRead *.bib colorscheme meta5 | let g:texColor = g:colors_name
 
 " gruvbox configuration
 let g:gruvbox_contrast_dark = "medium"
