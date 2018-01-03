@@ -90,3 +90,5 @@ source .fenics.dev
 
 bindkey "^[l" forward-word
 bindkey "^[h" backward-word
+
+export PYTHONDONTWRITEBYTECODE=1
