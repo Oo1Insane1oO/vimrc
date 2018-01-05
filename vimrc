@@ -1,5 +1,4 @@
-set nocompatible "required for Vundle
-filetype off "required for Vundle
+set nocompatible "required for Vundlefiletype off "required for Vundle
 
 "set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -18,7 +17,6 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'joshdick/onedark.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'christophermca/meta5'
-Plugin 'AlessandroYorba/Libertine'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -160,6 +158,9 @@ set softtabstop=4
 set expandtab
 set autoindent
 set smartindent
+set cindent
+set cinkeys-=0#
+set indentkeys-=0#
 
 "save backup in different directory
 silent set backupdir=~/.vim/tmp/backup/
