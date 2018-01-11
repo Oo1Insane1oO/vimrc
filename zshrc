@@ -83,10 +83,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias blender="~/.blender-2.77a-linux-glibc211-x86_64/blender"
-alias fenicsproject="~/.local/bin/fenicsproject"
 alias python="/usr/bin/python2"
 alias qtcreator="/opt/Qt/Tools/QtCreator/bin/qtcreator"
-source .fenics.dev
 
 bindkey "^[l" forward-word
 bindkey "^[h" backward-word
