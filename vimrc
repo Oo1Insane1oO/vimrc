@@ -398,3 +398,9 @@ endfunction
 
 "map ToggleHeaderSource to <leader>s
 map <leader>s :call ToggleHeaderSource()<CR>
+
+"map ctrl+md to show markdown
+function! ShowFile()
+    execute "!(google-chrome " . expand('%') . ")"
+endfunction
+cmap md :call ShowFile()<CR>
