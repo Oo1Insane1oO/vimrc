@@ -17,6 +17,7 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'joshdick/onedark.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'christophermca/meta5'
+Plugin 'chrisbra/csv.vim'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -75,6 +76,7 @@ set hidden
 
 "Command-line completion
 set wildmenu
+set wildmode=longest,list,full
 
 "Show partial commands
 set showcmd
@@ -282,7 +284,7 @@ inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" 
 " let g:ycm_python_binary_path = '/usr/local/bin/python3'
 
 "YCM semantic support
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_global_ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 
 set shell=/bin/bash
 
@@ -404,3 +406,11 @@ function! ShowFile()
     execute "!(google-chrome " . expand('%') . ")"
 endfunction
 cmap md :call ShowFile()<CR>
+
+" let syntastic use c++17
+let g:syntastic_cpp_checkers = ['gcc']
+let g:syntastic_cpp_compiler = 'gcc'
+let g:syntastic_cpp_compiler_options = '-std::c++17'
+
+" make ycm compliant with syntastic
+let g:ycm_show_diagnostics_ui = 0
