@@ -352,7 +352,7 @@ function! CleanTemp()
 endfunction
 
 "map <ctrl-ctrl> to copy to clipboard using xclip
-vnoremap <C>yc :w !xclip -i -sel c<CR><CR>
+vnoremap <C>yc :!xclip -i -sel clip<CR><CR>
 
 "map <S-insert> to xterm
 map <S-Insert> <MiddleMouse>
@@ -414,3 +414,6 @@ let g:syntastic_cpp_compiler_options = '-std::c++17'
 
 " make ycm compliant with syntastic
 let g:ycm_show_diagnostics_ui = 0
+
+" highlight angle brackets
+setglobal matchpairs+=<:>
