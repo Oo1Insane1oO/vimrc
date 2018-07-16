@@ -18,6 +18,7 @@ Plugin 'joshdick/onedark.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'christophermca/meta5'
 Plugin 'chrisbra/csv.vim'
+Plugin 'wellle/targets.vim'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required

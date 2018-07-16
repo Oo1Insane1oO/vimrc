@@ -1,5 +1,5 @@
 !URxvt.font:             xft:Bitstream Vera Sans Mono:pixelsize=12
-URxvt.font:                 xft:DejaVu Sans Mono:pixelsize=12
+URxvt.font:                 xft:DejaVu Sans Mono:pixelsize=13
 URxvt.letterSpace:          -1
 URxvt.termName:             rxvt
 URxvt.scrollBar:            false
@@ -9,6 +9,7 @@ URxvt.geometry:             240x84
 URxvt.borderless:           1
 URxvt.perl-lib:             /usr/lib/urxvt/perl/
 URxvt.perl-ext-common:      ...,tabbed,...
+URxvt.perl-ext-common:      ...,font-size,...
 URxvt.urlLauncher:          /usr/bin/jumanji
 URxvt.matcher.button:       1
 URxvt.iconFile:             /usr/share/icons/rxvt/rxvt.png
@@ -23,6 +24,10 @@ URxvt.keysym.M-Down:        \033[1;3B
 URxvt.keysym.M-Up:          \033[1;3A
 URxvt.keysym.M-Left:        \033[1;3D
 URxvt.keysym.M-Right:       \033[1;3C
+
+URxvt.keysym.C--:       perl:font-size:decrease
+URxvt.keysym.C-+:       perl:font-size:increase
+URxvt.keysym.C-equal:   perl:font-size:reset
 
 URxvt.keysym.Control-Up:    \033[1;5A
 URxvt.keysym.Control-Down:  \033[1;5B
