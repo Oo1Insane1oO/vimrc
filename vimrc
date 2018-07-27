@@ -229,6 +229,9 @@ vnoremap <S-l> w
 "set <TAB><TAB> as additional 'ENTER'
 nmap <TAB><TAB> <CR>
 
+"bind move to beginning of line command mode
+cnoremap <C-a> <C-b>
+
 "use standard commenting 
 let s:comment_map = {
     \   "c": '\/\/ ',
