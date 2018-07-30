@@ -411,10 +411,21 @@ function! ShowFile()
 endfunction
 cmap md :call ShowFile()<CR>
 
+"syntastic setting
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " let syntastic use c++17
 let g:syntastic_cpp_checkers = ['gcc']
 let g:syntastic_cpp_compiler = 'gcc'
 let g:syntastic_cpp_compiler_options = '-std::c++17'
+
+" use python3 with syntastic
+let g:syntastic_python_pylint_exe = 'python3 -m pylint'
 
 " make ycm compliant with syntastic
 let g:ycm_show_diagnostics_ui = 0
