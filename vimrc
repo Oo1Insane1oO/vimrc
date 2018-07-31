@@ -13,12 +13,12 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'vim-syntastic/syntastic'
 Plugin 'joshdick/onedark.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'christophermca/meta5'
 Plugin 'chrisbra/csv.vim'
 Plugin 'wellle/targets.vim'
+Plugin 'w0rp/ale'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -411,24 +411,32 @@ function! ShowFile()
 endfunction
 cmap md :call ShowFile()<CR>
 
-"syntastic setting
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"Ale settings
+let g:airline#extensions#ale#enabled = 1
+let b:ale_linters = ['pylint']
 
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+nmap <silent> <C-z> <Plug>(ale_previous_wrap)
+nmap <silent> <C-x> <Plug>(ale_next_wrap)
 
-" let syntastic use c++17
-let g:syntastic_cpp_checkers = ['gcc']
-let g:syntastic_cpp_compiler = 'gcc'
-let g:syntastic_cpp_compiler_options = '-std::c++17'
-
-" use python3 with syntastic
-let g:syntastic_python_pylint_exe = 'python3 -m pylint'
-
-" make ycm compliant with syntastic
-let g:ycm_show_diagnostics_ui = 0
+" "syntastic setting
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" 
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" 
+" "let syntastic use c++17 and g++
+" let g:syntastic_cpp_checkers = ['gcc']
+" let g:syntastic_cpp_compiler = 'gcc'
+" let g:syntastic_cpp_compiler_options = '-std::c++17'
+" 
+" "use python3 and pylint with syntastic
+" let g:syntastic_python_pylint_exe = 'python3 -m pylint'
+" let g:syntastic_python_checkers = ['pylint']
+" 
+" "make ycm compliant with syntastic
+" let g:ycm_show_diagnostics_ui = 0
 
 " highlight angle brackets
 setglobal matchpairs+=<:>
