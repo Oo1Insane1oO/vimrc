@@ -119,6 +119,9 @@ set number
 "Buffer screen updates (instead of all the time)
 set lazyredraw
 
+"use ttyfast
+set ttyfast
+
 "set clipboard options
 set clipboard+=unnamed
 set go+=a
@@ -372,33 +375,24 @@ vnoremap ge :%j<CR>
 
 "list of file extentions with headers
 let s:extensions = {
-    \   '.cpp' : '.h',
-    \   '.h' : '.cpp',
-    \ }
-
-"set extension of current file
-"function! ToggleHeaderSource()
-"    let l:extension = "." . expand('%:e')
-"    let l:list = ['']
-"    for a:k in keys(s:extensions)
-"       call add(l:list,  system("find . -name " . expand('%:t:r') . a:k))
-"    endfor
-"    for a:i in l:list
-"        if a:i =~ s:extensions[l:extension]
-"            execute "e ". a:i
-"            break
-"        endif
-"    endfor
-"endfunction
+    \   'cpp' : ['.h', '.hpp'],
+    \   'c' : ['.h'],
+    \   'h' : ['.c', '.cpp'],
+    \   'hpp' : ['.cpp']
+\ }
 
 function! ToggleHeaderSource()
-    let l:path = expand('%:h') . '/'
+    let l:path = expand('%:h') . "/"
     let l:filename = expand('%:t:r')
     let l:extension = expand('%:e')
-    if  l:extension == "h"
-        execute "e " . l:path . l:filename . ".cpp"
-    elseif l:extension == "cpp"
-        execute "e " . l:path . l:filename . ".h"
+    if has_key(s:extensions, l:extension)
+        for a:k in s:extensions[l:extension]
+            let l:fileExtendedPath = l:path . l:filename . a:k
+            if filereadable(l:fileExtendedPath)
+                execute "e " . l:fileExtendedPath
+                break
+            endif
+        endfor
     endif
 endfunction
 
@@ -413,10 +407,13 @@ cmap md :call ShowFile()<CR>
 
 "Ale settings
 let g:airline#extensions#ale#enabled = 1
-let b:ale_linters = ['pylint']
+let b:ale_linters = {
+\    'python': ['pylint'],
+\    'C++': ['clang'],
+\ }
 
-nmap <silent> <C-z> <Plug>(ale_previous_wrap)
-nmap <silent> <C-x> <Plug>(ale_next_wrap)
+nmap <silent> <leader>n <Plug>(ale_previous_wrap)
+nmap <silent> <leader>m <Plug>(ale_next_wrap)
 
 " "syntastic setting
 " set statusline+=%#warningmsg#
