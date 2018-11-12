@@ -35,7 +35,7 @@ ZSH_THEME="pygmalion"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -49,7 +49,7 @@ ZSH_THEME="pygmalion"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git,virtualenv)
 
 # User configuration
 
@@ -90,3 +90,13 @@ bindkey "^[l" forward-word
 bindkey "^[h" backward-word
 
 export PYTHONDONTWRITEBYTECODE=1
+
+# always create venv in .venv within project
+export PIPENV_VENV_IN_PROJECT=1
+
+# disble prompt for showing venv
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# dont download lfs files by default when cloning
+export GIT_LFS_SKIP_SMUDGE=1
+
