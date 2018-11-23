@@ -19,6 +19,7 @@ Plugin 'christophermca/meta5'
 Plugin 'chrisbra/csv.vim'
 Plugin 'wellle/targets.vim'
 Plugin 'w0rp/ale'
+Plugin 'vimwiki/vimwiki'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -189,7 +190,7 @@ hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
 nmap <Space><Space> :TagbarToggle<CR>
 
 "use Tab+space-space to toggle NERDtree
-nmap <Tab><Space> :NERDTreeToggle<CR>
+nmap <Tab><Space> :NERDTree %<CR>
 
 "use Space+t to jump to tagbar
 nnoremap <Space>t :TagbarOpen fj<CR>
@@ -415,25 +416,11 @@ let b:ale_linters = {
 nmap <silent> <leader>n <Plug>(ale_previous_wrap)
 nmap <silent> <leader>m <Plug>(ale_next_wrap)
 
-" "syntastic setting
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" 
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" 
-" "let syntastic use c++17 and g++
-" let g:syntastic_cpp_checkers = ['gcc']
-" let g:syntastic_cpp_compiler = 'gcc'
-" let g:syntastic_cpp_compiler_options = '-std::c++17'
-" 
-" "use python3 and pylint with syntastic
-" let g:syntastic_python_pylint_exe = 'python3 -m pylint'
-" let g:syntastic_python_checkers = ['pylint']
-" 
-" "make ycm compliant with syntastic
-" let g:ycm_show_diagnostics_ui = 0
-
 " highlight angle brackets
 setglobal matchpairs+=<:>
+
+" highlight double quotes
+setglobal matchpairs+=":"
+
+" highlight single quotes
+setglobal matchpairs+=':'
