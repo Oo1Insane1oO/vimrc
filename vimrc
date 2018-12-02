@@ -12,6 +12,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-fugitive'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'joshdick/onedark.vim'
 Plugin 'morhetz/gruvbox'
@@ -170,15 +171,22 @@ set cinkeys-=0#
 set indentkeys-=0#
 
 "save backup in different directory
-silent set backupdir=~/.vim/tmp/backup/
+let g:tmpDir="~/.vim/tmp"
+let g:backupDir=g:tmpDir . "/backup/"
+call system("mkdir -p " . g:backupDir)
+silent set backupdir=g:backupDir
 silent set backup
 
 "save swap in different directory
-silent set directory=~/.vim/tmp/swap/
+let g:swapDir=g:tmpDir . "/swap/"
+call system("mkdir -p " . g:swapDir)
+silent set directory=g:swapDir
 silent set directory
 
 "save undo in different directory
-silent set undodir=~/.vim/tmp/undo/
+let g:undoDir=g:tmpDir . "/undo/"
+call system("mkdir -p " . g:undoDir)
+silent set undodir=g:undoDir
 silent set undofile
 
 "Set color of tab bar
