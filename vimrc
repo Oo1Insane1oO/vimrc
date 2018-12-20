@@ -1,3 +1,5 @@
+runtime!archlinux.vim
+
 set nocompatible "required for Vundlefiletype off "required for Vundle
 
 "set the runtime path to include Vundle and initialize
@@ -170,23 +172,19 @@ set cindent
 set cinkeys-=0#
 set indentkeys-=0#
 
-"save backup in different directory
-let g:tmpDir="~/.vim/tmp"
-let g:backupDir=g:tmpDir . "/backup/"
+"save backup, swap and undo in different directory
+let g:tmpDir=$HOME. "/.vim/tmp"
+let g:backupDir=g:tmpDir . "/backup//"
+let g:swapDir=g:tmpDir . "/swap//"
+let g:undoDir=g:tmpDir . "/undo//"
 call system("mkdir -p " . g:backupDir)
-silent set backupdir=g:backupDir
-silent set backup
-
-"save swap in different directory
-let g:swapDir=g:tmpDir . "/swap/"
 call system("mkdir -p " . g:swapDir)
-silent set directory=g:swapDir
-silent set directory
-
-"save undo in different directory
-let g:undoDir=g:tmpDir . "/undo/"
 call system("mkdir -p " . g:undoDir)
-silent set undodir=g:undoDir
+let &backupdir=g:backupDir
+let &directory=g:swapDir
+let &undodir=g:undoDir
+silent set backup
+silent set directory
 silent set undofile
 
 "Set color of tab bar
@@ -260,6 +258,7 @@ let s:comment_map = {
     \   "zsh": '# ',
     \   "lammps": '# ',
     \   "yaml": '# ',
+    \   ".vimrc": '" ',
     \ }
 
 "function for toggling comment 
