@@ -1,7 +1,0 @@
-UXTerm*font: *-fixed-*-*-*-15-*
-UXTerm*renderFont:true
-UXTerm*faceName: VeraMono
-UXTerm*faceSize: 10
-UXTerm*loginshell: true
-UXTerm*savelines: 16384
-UXTerm*termName: xterm-256color
