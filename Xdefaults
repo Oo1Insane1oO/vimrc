@@ -17,7 +17,7 @@ URxvt.fading:               30
 URxvt.fadeColor:            #000000
 URxvt.depth:                32
 URxvt.background:           rgba:0000/0000/0200/c800
-URxvt.perl-ext-common:      tabbed,resize-font
+URxvt.perl-ext-common:      resize-font
 URxvt.internalBorder:       1
 
 URxvt.keysym.M-Down:        \033[1;3B
@@ -38,11 +38,6 @@ URxvt.iso14755: False
 Xft.dpi:        96
 Xft.antialias:  true
 Xft.hinting:    full
-
-URxvt.tabbed.tabbar-fg: 2
-URxvt.tabbed.tabbar-bg: 0
-URxvt.tabbed.tab-fg: 3
-URxvt.tabbed.tab-bg: 0
 
 URxvt.color0:       #000000
 URxvt.color8:       #8b8f93
