@@ -179,3 +179,5 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # dont download lfs files by default when cloning
 export GIT_LFS_SKIP_SMUDGE=1
+
+export TERMINAL=urxvt

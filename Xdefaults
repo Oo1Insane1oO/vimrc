@@ -18,6 +18,7 @@ URxvt.fadeColor:            #000000
 URxvt.depth:                32
 URxvt.background:           rgba:0000/0000/0200/c800
 URxvt.perl-ext-common:      tabbed,resize-font
+URxvt.internalBorder:       1
 
 URxvt.keysym.M-Down:        \033[1;3B
 URxvt.keysym.M-Up:          \033[1;3A
