@@ -204,6 +204,13 @@ nnoremap <Space>t :TagbarOpen fj<CR>
 "use shift+Tab+t to jump to NERDtree
 nnoremap <Tab><Space>t :NERDTreeCWD<CR>
 
+"let i open split below buffer NERDTree was opened from
+nnoremap <leader>i :2winc l \| split \| 2winc h \| norm o<CR>
+
+"dont show '?' in NERDTree buffer
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
 "set paste-toggle to leader(backslash)-z
 set pastetoggle=<leader>z
 
@@ -258,6 +265,7 @@ let s:comment_map = {
     \   "zsh": '# ',
     \   "lammps": '# ',
     \   "yaml": '# ',
+    \   "lua": '-- ',
     \   ".vimrc": '" ',
     \ }
 
