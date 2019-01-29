@@ -76,6 +76,13 @@ syntax on
 "make default tex view to latex rather then plainlatex
 let g:tex_flavor = "latex"
 
+"set linebreak to 100 chars
+set textwidth=100
+
+"dont automatically break text, but rather wrap
+set wrap linebreak nolist
+set formatoptions-=t
+
 "Awesomeness
 set hidden
 
@@ -140,10 +147,30 @@ autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 "close preview window after autocomplete
 autocmd CompleteDone * pclose
 
-"Disable TouchPad on startup, reenable on exit
+"touchpad behavior
+let g:toggleTouch = 1
 set mouse-=a
-autocmd VimEnter * :silent !(xinput list | if grep -i 'TouchPad'; then xinput --disable  $(xinput list | grep -i Touchpad | cut -d = -f2 | sed 's/[slave].*//' | sed 's/[^0-9]//g'); fi)
-autocmd VimLeave * :silent !(xinput list | if grep -i 'TouchPad'; then xinput --enable $(xinput list | grep -i Touchpad | cut -d = -f2 | sed 's/[slave].*//' | sed 's/[^0-9]//g'); fi)
+
+function! Ms(mode)
+    "set touchpad (mode=enable/disable)
+    if g:toggleTouch
+        execute "silent !(xinput list | if grep -i 'TouchPad'; then xinput --" . a:mode . " $(xinput list | grep -i Touchpad | cut -d = -f2 | sed 's/[slave].*//' | sed 's/[^0-9]//g'); fi)"
+    endif
+endfunction
+
+function! ToggleDisableTouch()
+    "toggle global which determines toggling of touchpad
+    if g:toggleTouch
+        call Ms("enable")
+        g:toggleTouch = 0
+    else
+        call Ms("disable")
+        g:ToggleTouch = 1
+    endif
+endfunction
+
+"set leader+m+s to diable toggling of touchpad
+nnoremap <leader>ms :call ToggleDisableTouch()<CR>
 
 "apply Touchpad behaviour on suspend
 function! SetBPM(mode)
@@ -151,10 +178,8 @@ function! SetBPM(mode)
     execute "silent !echo -ne '\033[?2004" . a:mode . "'"
 endfunction
 
-function! Ms(mode)
-    "set touchpad (mode=enable/disable)
-    execute "silent !(xinput list | if grep -i 'TouchPad'; then xinput --" . a:mode . " $(xinput list | grep -i Touchpad | cut -d = -f2 | sed 's/[slave].*//' | sed 's/[^0-9]//g'); fi)"
-endfunction
+autocmd VimEnter * :call Ms("disable")
+autocmd VimLeave * :call Ms("enable")
 
 "Toggle BPM when suspending (hook ctrl-z)
 nnoremap <silent> <C-z> :call SetBPM("l")<bar>:call Ms("enable")<CR>
@@ -203,9 +228,6 @@ nnoremap <Space>t :TagbarOpen fj<CR>
 
 "use shift+Tab+t to jump to NERDtree
 nnoremap <Tab><Space>t :NERDTreeCWD<CR>
-
-"let i open split below buffer NERDTree was opened from
-nnoremap <leader>i :2winc l \| split \| 2winc h \| norm o<CR>
 
 "dont show '?' in NERDTree buffer
 let NERDTreeMinimalUI = 1
