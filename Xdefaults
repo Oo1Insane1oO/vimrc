@@ -22,10 +22,13 @@ URxvt.keysym.M-Up:          \033[1;3A
 URxvt.keysym.M-Left:        \033[1;3D
 URxvt.keysym.M-Right:       \033[1;3C
 
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-Escape:   perl:keyboard-select:activate
 URxvt.keysym.M-Tab:      perl:keyboard-select:search
 
-URxvt.iso14755: false
+URxvt.keysym.M-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+
+URxvt.iso14755:   false
 URxvt.iso1475552: false
 
 URxvt.keysym.Control-Up:    \033[1;5A
