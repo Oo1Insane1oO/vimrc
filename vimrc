@@ -333,7 +333,7 @@ inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" 
 "YCM semantic support
 let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 
-set shell=/bin/bash
+set shell=/bin/zsh
 
 "function to find current user
 function! GetUser()
