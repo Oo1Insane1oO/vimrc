@@ -77,7 +77,7 @@ syntax on
 let g:tex_flavor = "latex"
 
 "set linebreak to 100 chars
-set textwidth=100
+set textwidth=99
 
 "dont automatically break text, but rather wrap
 set wrap linebreak nolist
@@ -248,6 +248,8 @@ noremap <C-k> <C-w>k
 
 " make saving easier
 cnoremap W<CR> w<CR>
+cnoremap Wq<CR> wq<CR>
+cnoremap Wa<CR> wa<CR>
 
 "use shift+j/k to move pages in normal and visual mode
 nnoremap <S-k> 
@@ -450,6 +452,8 @@ let b:ale_linters = {
 \    'C++': ['clang'],
 \ }
 
+let g:ale_cpp_clang_options="-I/usr/include/eigen3/ -I/usr/include/ -L/usr/lib/ -std=c++17 -Wall"
+
 nmap <silent> <leader>n <Plug>(ale_previous_wrap)
 nmap <silent> <leader>m <Plug>(ale_next_wrap)
 
@@ -461,3 +465,6 @@ setglobal matchpairs+=":"
 
 " highlight single quotes
 setglobal matchpairs+=':'
+
+nnoremap tt :terminal <CR>
+nnoremap vtt :vertical terminal <CR>
