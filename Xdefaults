@@ -23,6 +23,7 @@ URxvt.keysym.M-Left:        \033[1;3D
 URxvt.keysym.M-Right:       \033[1;3C
 
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-Tab:      perl:keyboard-select:search
 
 URxvt.iso14755: false
 URxvt.iso1475552: false
