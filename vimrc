@@ -22,7 +22,6 @@ Plugin 'christophermca/meta5'
 Plugin 'chrisbra/csv.vim'
 Plugin 'wellle/targets.vim'
 Plugin 'w0rp/ale'
-Plugin 'vimwiki/vimwiki'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -143,9 +142,6 @@ set splitbelow
 
 "fix slow tagbar
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
-
-"close preview window after autocomplete
-autocmd CompleteDone * pclose
 
 "touchpad behavior
 let g:toggleTouch = 1
@@ -342,8 +338,7 @@ function! GetUser()
 endfunction
 
 "set automatic preamble in .tex files (on linux)
-let currUser = GetUser()
-execute "autocmd BufNewFile *.tex :r /home/" . currUser . "/.vim/texPreamble"
+autocmd BufNewFile *.tex :r "/home/" . GetUser() . "/.vim/texPreamble"
 autocmd BufNewFile *.tex :set filetype=tex
 
 "function for setting tex directory
@@ -451,8 +446,9 @@ let b:ale_linters = {
 \    'python': ['pylint'],
 \    'C++': ['clang'],
 \ }
-
 let g:ale_cpp_clang_options="-I/usr/include/eigen3/ -I/usr/include/ -L/usr/lib/ -std=c++17 -Wall"
+let g:ale_completion_enabled=1
+let g:ale_lint_on_enter=0
 
 nmap <silent> <leader>n <Plug>(ale_previous_wrap)
 nmap <silent> <leader>m <Plug>(ale_next_wrap)
@@ -466,5 +462,6 @@ setglobal matchpairs+=":"
 " highlight single quotes
 setglobal matchpairs+=':'
 
+" open terminal with tt (hsplit) and vtt (vsplit)
 nnoremap tt :terminal <CR>
 nnoremap vtt :vertical terminal <CR>
