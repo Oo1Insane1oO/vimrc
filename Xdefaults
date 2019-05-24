@@ -8,12 +8,12 @@ URxvt.borderless:           1
 URxvt.perl-lib:             /usr/lib/urxvt/perl/
 URxvt.urlLauncher:          /usr/bin/google-chrome-stable
 URxvt.matcher.button:       1
-URxvt.iconFile:             ~/icons/rxvt/rxvt.png
+URxvt.iconFile:             ~/icons/rxvt/rxvt.jpeg
 URxvt.foreground:           #ffffff
 URxvt.fading:               30
 URxvt.fadeColor:            #000000
 URxvt.depth:                32
-URxvt.background:           [56]#000000
+URxvt.background:           [5]#000000
 URxvt.perl-ext-common:      default,resize-font,keyboard-select,url-select,clipboard
 URxvt.internalBorder:       0
 
@@ -40,19 +40,75 @@ Xft.dpi:        96
 Xft.antialias:  true
 Xft.hinting:    full
 
-URxvt.color0:       #000000
-URxvt.color8:       #8b8f93
-URxvt.color1:       #dc74d1
-URxvt.color9:       #dc74d1
-URxvt.color2:       #0eb8c7
-URxvt.color10:      #0eb8c7
-URxvt.color3:       #dfe37e
-URxvt.color11:      #dfe37e
+!!black
+!URxvt.color0:       #000000
+!!grey
+!URxvt.color8:       #8b8f93
+!!pink
+!URxvt.color1:       #dc74d1
+!!pink
+!URxvt.color9:       #dc74d1
+!!cyan
+!URxvt.color2:       #0eb8c7
+!!cyan
+!URxvt.color10:      #0eb8c7
+!!yellow
+!URxvt.color3:       #dfe37e
+!!yellow
+!URxvt.color11:      #dfe37e
+!!blue
+!URxvt.color4:       #3465A4
+!!light blue
+!URxvt.color12:      #729FCF
+!!violet
+!URxvt.color5:       #9e88f0
+!!violet
+!URxvt.color13:      #9e88f0
+!!light cyan
+!URxvt.color6:       #73f7ff
+!!light cyan
+!URxvt.color14:      #73f7ff
+!!light grey
+!URxvt.color7:       #e1dddd
+!!light grey
+!URxvt.color15:      #e1dddd
+
+!black
+URxvt.color0:       #1d2021
+!grey
+URxvt.color8:       #bdae93
+
+!pink
+URxvt.color1:       #d3869b
+!pink
+URxvt.color9:       #d3869b
+
+!cyan
+URxvt.color2:       #0AADCE
+!cyan
+URxvt.color10:      #0AADCE
+
+!yellow
+URxvt.color3:       #fabd2f
+!yellow
+URxvt.color11:      #fabd2f
+
+!blue
 URxvt.color4:       #3465A4
+!light blue
 URxvt.color12:      #729FCF
+
+!violet
 URxvt.color5:       #9e88f0
+!violet
 URxvt.color13:      #9e88f0
-URxvt.color6:       #73f7ff
-URxvt.color14:      #73f7ff
-URxvt.color7:       #e1dddd
-URxvt.color15:      #e1dddd
+
+!light cyan
+URxvt.color6:       #50b3e5
+!light cyan
+URxvt.color14:      #50b3e5
+
+!light grey
+URxvt.color7:       #f9f5d7
+!light grey
+URxvt.color15:      #f9f5d7
