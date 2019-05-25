@@ -1,1 +1,6 @@
 xcompmgr -c &
+
+xset +fp /home/saintz/.local/share/fonts
+xset fp rehash
+
+urxvtd &

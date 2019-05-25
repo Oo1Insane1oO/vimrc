@@ -43,7 +43,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("~/.config/awesome/theme.lua")
 beautiful.icon_theme        = "Papirus-Dark"
--- beautiful.icon_theme        = "Siji"
+-- beautiful.icon_theme        = "siji.pcf"
 -- beautiful.bg_normal         = "#32302f"
 -- beautiful.bg_focus          = "#d65d0e"
 -- beautiful.font              = "DejaVu Sans Mono 10"
@@ -53,7 +53,7 @@ beautiful.icon_theme        = "Papirus-Dark"
 browser = "google-chrome-stable" or "exo-open --launch WebBrowser"
 filemanager = "exo-open --launch FileManager" or "thunar"
 gui_editor = "mousepad"
-terminal = "urxvt" or os.getenv("TERMINAL")
+terminal = "urxvtc" or os.getenv("TERMINAL")
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
