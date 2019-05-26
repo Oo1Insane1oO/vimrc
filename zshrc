@@ -37,7 +37,7 @@ ZSH_THEME="alien-minimal/alien-minimal"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -60,11 +60,19 @@ plugins=(git virtualenv zsh-autosuggestions)
 
 # alien-minimal settings
 export AM_SHOW_FULL_DIR=1 # shows the full dir path
+export PLIB_GIT_ADD_SYM='+'  # Git New Tracked File Symbol
+export PLIB_GIT_DEL_SYM='-'  # Git Deleted File Symbol
+export PLIB_GIT_MOD_SYM='*'  # Git Modified File Symbol
+export PLIB_GIT_NEW_SYM='?'  # Git New Untracked File Symbol
+export PLIB_GIT_PUSH_SYM='↑' # Git Unpushed Commit Symbol
+export PLIB_GIT_PULL_SYM='↓' # Git New Commit Symbol
 
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -186,6 +194,7 @@ export PIPENV_VENV_IN_PROJECT=1
 # dont download lfs files by default when cloning
 export GIT_LFS_SKIP_SMUDGE=1
 
+export TERM=xterm-256color
 export TERMINAL=urxvt
 
 export PYENV_ROOT="$HOME/.pyenv"
