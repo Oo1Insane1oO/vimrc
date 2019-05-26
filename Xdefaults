@@ -1,20 +1,21 @@
-URxvt.font:                 xft:DejaVu Sans Mono:pixelsize=12
+URxvt.font:                 xft:DejaVu Sans Mono:pixelsize=14
+URxvt.letterSpace:          2
 URxvt.termName:             rxvt
 URxvt.scrollBar:            false
 URxvt.scrollBar_right:      false
 URxvt.scrollBar_floating:   false
-URxvt.geometry:             240x84
+!URxvt.geometry:             240x84
 URxvt.borderless:           1
 URxvt.perl-lib:             /usr/lib/urxvt/perl/
 URxvt.urlLauncher:          /usr/bin/google-chrome-stable
 URxvt.matcher.button:       1
-URxvt.iconFile:             ~/icons/rxvt/rxvt.jpeg
+URxvt.iconFile:             /home/saintz/.local/share/icons/OieIcons/scalable/apps/lxterminal.svg
 URxvt.foreground:           #ffffff
 URxvt.fading:               30
 URxvt.fadeColor:            #000000
 URxvt.depth:                32
-URxvt.background:           [5]#000000
-URxvt.perl-ext-common:      default,resize-font,keyboard-select,url-select,clipboard
+URxvt.background:           [65]#000000
+URxvt.perl-ext-common:      resize-font,keyboard-select,url-select,clipboard
 URxvt.internalBorder:       0
 
 URxvt.keysym.M-Down:        \033[1;3B
@@ -89,9 +90,9 @@ URxvt.color2:       #0AADCE
 URxvt.color10:      #0AADCE
 
 !yellow
-URxvt.color3:       #fabd2f
+URxvt.color3:       #fe8019
 !yellow
-URxvt.color11:      #fabd2f
+URxvt.color11:      #fe8019
 
 !blue
 URxvt.color4:       #3465A4

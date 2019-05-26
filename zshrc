@@ -5,7 +5,9 @@
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="miloshadzic"
+# ZSH_THEME="miloshadzic"
+# ZSH_THEME="pygmalion-virtualenv"
+ZSH_THEME="alien-minimal/alien-minimal"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,12 +51,15 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git,virtualenv,zsh-autosuggestions)
+plugins=(git virtualenv zsh-autosuggestions)
 
 # User configuration
 
   export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
+
+# alien-minimal settings
+export AM_SHOW_FULL_DIR=1 # shows the full dir path
 
 source $ZSH/oh-my-zsh.sh
 
@@ -182,3 +187,9 @@ export PIPENV_VENV_IN_PROJECT=1
 export GIT_LFS_SKIP_SMUDGE=1
 
 export TERMINAL=urxvt
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
