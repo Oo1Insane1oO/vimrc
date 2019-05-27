@@ -18,7 +18,7 @@ URxvt.foreground:           #ffffff
 URxvt.fading:               30
 URxvt.fadeColor:            #000000
 URxvt.depth:                32
-URxvt.background:           [65]#000000
+URxvt.background:           [65]#23140b
 URxvt.perl-ext-common:      resize-font,keyboard-select,url-select,clipboard
 URxvt.internalBorder:       0
 
