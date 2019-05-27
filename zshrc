@@ -59,7 +59,27 @@ plugins=(git virtualenv zsh-autosuggestions)
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # alien-minimal settings
-export AM_SHOW_FULL_DIR=1 # shows the full dir path
+export AM_SHOW_FULL_DIR=1    # shows the full dir path
+export AM_GIT_STASH_SYM='@'  # Git Stash Count Symbbol
+export AM_GIT_BARE_SYM='☢'   # Git bare repo Symbbol
+
+export am_vcs_color=6           # color for VCS (G: M: V:)
+export am_ssh_color=11          # color for ssh indicaator
+export am_normal_color=14       # color for normal text
+export am_error_color=14        # color for ERROR (same as normal)
+export am_rev_color=13          # color for VCS Revision number
+export am_branch_color=41       # color for VCS BRANCH name
+export am_left_right_color=3    # color for GIT Left-Right status
+export am_stash_color=3         # color for GIT stash count
+export am_bare_color=3          # color for GIT bare repo indicator
+export am_commit_since_color=11 # color for last commit time
+export am_fade_color=8          # color for fade text color
+export am_venv_color=6          # color for virtual environment
+export am_timer_color=14        # color for command execution time
+export am_viins_color=39        # color for viins mode
+export am_vicmd_color=208       # color vicmd mode
+
+# promtlib settings
 export PLIB_GIT_ADD_SYM='+'  # Git New Tracked File Symbol
 export PLIB_GIT_DEL_SYM='-'  # Git Deleted File Symbol
 export PLIB_GIT_MOD_SYM='*'  # Git Modified File Symbol

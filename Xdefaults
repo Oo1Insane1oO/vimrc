@@ -41,75 +41,46 @@ URxvt.keysym.Control-Down:  \033[1;5B
 URxvt.keysym.Control-Left:  \033[1;5D
 URxvt.keysym.Control-Right: \033[1;5C
 
-!!black
-!URxvt.color0:       #000000
-!!grey
-!URxvt.color8:       #8b8f93
-!!pink
-!URxvt.color1:       #dc74d1
-!!pink
-!URxvt.color9:       #dc74d1
-!!cyan
-!URxvt.color2:       #0eb8c7
-!!cyan
-!URxvt.color10:      #0eb8c7
-!!yellow
-!URxvt.color3:       #dfe37e
-!!yellow
-!URxvt.color11:      #dfe37e
-!!blue
-!URxvt.color4:       #3465A4
-!!light blue
-!URxvt.color12:      #729FCF
-!!violet
-!URxvt.color5:       #9e88f0
-!!violet
-!URxvt.color13:      #9e88f0
-!!light cyan
-!URxvt.color6:       #73f7ff
-!!light cyan
-!URxvt.color14:      #73f7ff
-!!light grey
-!URxvt.color7:       #e1dddd
-!!light grey
-!URxvt.color15:      #e1dddd
+!path color (blue)
+URxvt.color14:      #5d93df
+
+!command color (cyan)
+URxvt.color2:       #25e4e4
+
+!dir color (purple)
+URxvt.color12:      #8181df
+
+!compressed color (red)
+URxvt.color9:       #c65353
+
+!image color (pink)
+URxvt.color13:      #d175d1
+
+!executable color (green)
+URxvt.color10:      #40bf40
+
+!string color (yellow)
+URxvt.color3:       #9f9f32
 
 !black
-URxvt.color0:       #1d2021
-!grey
-URxvt.color8:       #bdae93
+URxvt.color0:       #000000
+URxvt.color8:       #919191
 
-!pink
-URxvt.color1:       #cc73d4
-!pink
-URxvt.color9:       #cc73d4
-
-!cyan
-URxvt.color2:       #0cc8ed
-!cyan
-URxvt.color10:      #0cc8ed
+!red 
+URxvt.color1:       #de1717
 
 !yellow
-URxvt.color3:       #fabd2f
-!yellow
-URxvt.color11:      #fabd2f
+URxvt.color11:      #c9c936
 
-!blue
-URxvt.color4:       #1c6ed9
-!light blue
-URxvt.color12:      #729FCF
+!blue/purple
+URxvt.color4:       #2828b8
 
-!violet
-URxvt.color5:       #9e88f0
-!violet
-URxvt.color13:      #9e88f0
+!pink/violet
+URxvt.color5:       #ac2fac
 
-!light cyan
-URxvt.color6:       #50b3e5
-!light cyan
-URxvt.color14:      #50b3e5
+!teal
+URxvt.color6:       #50dca7
 
 !light grey
-URxvt.color7:       #f9f5d7
-!light grey
-URxvt.color15:      #f9f5d7
+URxvt.color7:       #c0c0c0
+URxvt.color15:      #faf2f0
