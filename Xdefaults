@@ -3,10 +3,6 @@ Xft.antialias:       true
 Xft.hinting:         true
 Xft.hintingstyle:    full
 
-!URxvt.font:                 xft:DejaVu Sans Mono:style=Book:pixelsize=14
-!URxvt.boldFont:             xft:DejaVu Sans Mono:style=Bold:pixelsize=14
-!URxvt.italicFont:           xft:DejaVu Sans Mono:style=Oblique:pixelsize=14
-!URxvt.letterSpace:          2
 URxvt.font:                 xft:inconsolata:size=14:antialias=true,xft:DejaVu Sans Mono:size=14:antialias=true,xft:Sauce Code Powerline:antialias=true:hinting=true:size=12
 URxvt.termName:             rxvt
 URxvt.scrollBar:            false
@@ -84,22 +80,22 @@ URxvt.color0:       #1d2021
 URxvt.color8:       #bdae93
 
 !pink
-URxvt.color1:       #d3869b
+URxvt.color1:       #cc73d4
 !pink
-URxvt.color9:       #d3869b
+URxvt.color9:       #cc73d4
 
 !cyan
-URxvt.color2:       #0AADCE
+URxvt.color2:       #0cc8ed
 !cyan
-URxvt.color10:      #0AADCE
+URxvt.color10:      #0cc8ed
 
 !yellow
-URxvt.color3:       #fe8019
+URxvt.color3:       #fabd2f
 !yellow
-URxvt.color11:      #fe8019
+URxvt.color11:      #fabd2f
 
 !blue
-URxvt.color4:       #3465A4
+URxvt.color4:       #1c6ed9
 !light blue
 URxvt.color12:      #729FCF
 
