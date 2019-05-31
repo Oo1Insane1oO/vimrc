@@ -22,6 +22,7 @@ Plugin 'christophermca/meta5'
 Plugin 'chrisbra/csv.vim'
 Plugin 'wellle/targets.vim'
 Plugin 'w0rp/ale'
+Plugin 'junegunn/rainbow_parentheses.vim'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -290,24 +291,28 @@ let s:comment_map = {
     \ }
 
 "function for toggling comment 
-function! ToggleComment()
+function! CommentLine(toggle)
     if has_key(s:comment_map, &filetype)
-        let comment_leader = s:comment_map[&filetype]
-        if getline('.') =~ "^" . comment_leader
+        let l:comment_leader = s:comment_map[&filetype]
+        if (a:toggle == 1) && (getline('.') =~ "\s*" . l:comment_leader)
             " Uncomment the line
-            execute "silent s/^" . comment_leader . "//"
-        else
+            execute 'silent s/' . l:comment_leader . '//'
+        elseif (a:toggle == 0) && (getline('.') !~ "\s*" . l:comment_leader)
+            execute 'silent s/\S\|$/' . l:comment_leader . '&/'
+        elseif  (a:toggle == 1) && (getline('.') !~ "\s*" . l:comment_leader)
             " Comment the line
-            execute "silent s/^/" . comment_leader . "/"
+            execute 'silent s/\S\|$/' . l:comment_leader . '&/'
         endif
     else
         echo "No comment leader found for filetype"
     end
 endfunction
 
-"use leader(\)->Space to call ToggleComment 
-nnoremap <leader><Space> :call ToggleComment()<cr>
-vnoremap <leader><Space> :call ToggleComment()<cr>
+"use leader(\)->Space to call ToggleComment
+nnoremap <leader><Space> :call CommentLine(1)<cr>
+vnoremap <leader><Space> :call CommentLine(1)<cr>
+nnoremap <leader><leader><Space> :call CommentLine(0)<cr>
+vnoremap <leader><leader><Space> :call CommentLine(0)<cr>
 
 "make ultisnips and YCM friends
 let g:UltiSnipsExpandTrigger = "<nop>"
@@ -453,15 +458,15 @@ let g:ale_lint_on_enter=0
 nmap <silent> <leader>n <Plug>(ale_previous_wrap)
 nmap <silent> <leader>m <Plug>(ale_next_wrap)
 
-" highlight angle brackets
+" highlight angle brackets, double- and single quotes
 setglobal matchpairs+=<:>
-
-" highlight double quotes
 setglobal matchpairs+=":"
-
-" highlight single quotes
 setglobal matchpairs+=':'
 
 " open terminal with tt (hsplit) and vtt (vsplit)
 nnoremap tt :terminal <CR>
 nnoremap vtt :vertical terminal <CR>
+
+" rainbow parantheses settings
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['<', '>']]
+let g:rainbow#blacklist = [233, 234]
