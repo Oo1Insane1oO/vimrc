@@ -21,6 +21,8 @@ URxvt.depth:                32
 URxvt.background:           [65]#23140b
 URxvt.perl-ext-common:      resize-font,keyboard-select,url-select,clipboard
 URxvt.internalBorder:       0
+URxvt.cursorColor:          #cccccc
+URxvt.cursorColor2:         #000000
 
 URxvt.keysym.M-Down:        \033[1;3B
 URxvt.keysym.M-Up:          \033[1;3A
@@ -48,7 +50,7 @@ URxvt.color14:      #5d93df
 URxvt.color2:       #25e4e4
 
 !dir color (purple)
-URxvt.color12:      #8181df
+URxvt.color12:      #7a8de1
 
 !compressed color (red)
 URxvt.color9:       #c65353
