@@ -2,7 +2,7 @@ runtime!archlinux.vim
 
 set nocompatible "required for Vundlefiletype off "required for Vundle
 
-"set the runtime path to include Vundle and initialize
+" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -16,32 +16,25 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'joshdick/onedark.vim'
 Plugin 'morhetz/gruvbox'
-Plugin 'christophermca/meta5'
-Plugin 'chrisbra/csv.vim'
 Plugin 'wellle/targets.vim'
 Plugin 'w0rp/ale'
-Plugin 'junegunn/rainbow_parentheses.vim'
 
-"All of your Plugins must be added before the following line
+" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required To ignore plugin indent changes, instead use:
 filetype plugin on
 
-"Enable syntax highlighting
+" Enable syntax highlighting
 syntax enable
 
-"Set background dark
+" Set background dark
 set background=dark
 
-"Set colorscheme
+" Set colorscheme
 set t_Co=256
-" colorscheme onedark
+"  colorscheme onedark
 colorscheme gruvbox 
-let g:globalColor = g:colors_name
-autocmd BufNewFile,BufRead *.tex colorscheme meta5 | let g:texColor = g:colors_name
-autocmd BufNewFile,BufRead *.bib colorscheme meta5 | let g:texColor = g:colors_name
 
 " gruvbox configuration
 let g:gruvbox_contrast_dark = "medium"
@@ -52,111 +45,100 @@ let g:airline#extensions#tabline#enabled = 1
 " set airline theme
 let g:airline_theme="onedark"
 
-" function for setting color
-function! SetColor()
-    " set colorscheme (to be used with setBPM and Ms)
-    if &filetype == 'tex'
-        set background=dark
-        execute "silent colorscheme " . g:texColor
-    else
-        set background=dark
-        execute "silent colorscheme " . g:globalColor
-    endif
-endfunction
-
-" call SetColor on entering a new tab
-autocmd TabEnter * :call SetColor()
-
-"Determine filetype and enable auto-indent
+" Determine filetype and enable auto-indent
 filetype indent plugin on
 
-"Enable Syntax highlighting
+" Enable Syntax highlighting
 syntax on
 
-"make default tex view to latex rather then plainlatex
-let g:tex_flavor = "latex"
-
-"set linebreak to 100 chars
+" set linebreak to 100 chars
 set textwidth=99
 
-"dont automatically break text, but rather wrap
+" dont automatically break text, but rather wrap
 set wrap linebreak nolist
 set formatoptions-=t
 
-"Awesomeness
+" Awesomeness
 set hidden
 
-"Command-line completion
+" Command-line completion
 set wildmenu
 set wildmode=longest,list,full
 
-"Show partial commands
+" Show partial commands
 set showcmd
 
-"Highlighted search
+" Highlighted search
 set hlsearch
 
-"Turn hlsearch off when enter is clicked
+" Turn hlsearch off when enter is clicked
 nnoremap <CR> :noh<CR><CR>
 
-"Incremental search
+" Incremental search
 set incsearch
 
-"Disable auto commenting
+" Disable auto commenting
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-"Case insensitive search
+" Case insensitive search
 set ignorecase
 set smartcase
 
-"Allow backspace over autoindent
+" Allow backspace over autoindent
 set backspace=indent,eol,start
 
-"Keep same indent as current line
+" Keep same indent as current line
 set autoindent
 
-"Set display cursor on last line
+" Set display cursor on last line
 set ruler
 
-"Always display status line
+" Always display status line
 set laststatus=2
 
-"Set command window height to 2 line
+" Set command window height to 2 line
 set cmdheight=2
 
-"Display line number
+" Display line number
 set number
 
-"Buffer screen updates (instead of all the time)
+"  Buffer screen updates (instead of all the time)
 set lazyredraw
 
-"use ttyfast
+" use ttyfast
 set ttyfast
 
-"set clipboard options
+" set clipboard options
 set clipboard+=unnamed
 set go+=a
 
-" open new splits to right and bottom
+"  open new splits to right and bottom
 set splitright
 set splitbelow
 
-"fix slow tagbar
+" fix slow tagbar
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 
-"touchpad behavior
+" touchpad behavior
 let g:toggleTouch = 1
+let g:touchpadID = system("echo $(xinput list | grep -i Touchpad | cut -d = -f2 | sed 's/[slave].*//' | sed 's/[^0-9]//g')")
 set mouse-=a
 
 function! Ms(mode)
     "set touchpad (mode=enable/disable)
-    if g:toggleTouch
-        execute "silent !(xinput list | if grep -i 'TouchPad'; then xinput --" . a:mode . " $(xinput list | grep -i Touchpad | cut -d = -f2 | sed 's/[slave].*//' | sed 's/[^0-9]//g'); fi)"
+    if g:toggleTouch && g:touchpadID != ""
+        call system("xinput --" . a:mode . " " . g:touchpadID . "> /dev/null/ 2>&1")
     endif
 endfunction
 
+" Toggle BPM when subshelling (hook ctrl-z)
+function! SetBPM(mode)
+    " (Re)Set Bracketed Paste Mode
+    execute "silent !echo -ne '\033[?2004" . a:mode . "'"
+endfunction
+
 function! ToggleDisableTouch()
-    "toggle global which determines toggling of touchpad
+    " toggle global which determines toggling of touchpad
     if g:toggleTouch
         call Ms("enable")
         g:toggleTouch = 0
@@ -166,24 +148,22 @@ function! ToggleDisableTouch()
     endif
 endfunction
 
-"set leader+m+s to diable toggling of touchpad
-nnoremap <leader>ms :call ToggleDisableTouch()<CR>
+" toggle touchpad behaviour
+if g:touchpadID != ""
+    nnoremap <silent> <C-z> :call SetBPM("l")<bar>
+                           \:call Ms("enable")<CR>
+                           \:suspend<bar>
+                           \:call SetBPM("h")<bar>
+                           \:call Ms("disable")<CR>
+                           \:redraw!<CR>
 
-"apply Touchpad behaviour on suspend
-function! SetBPM(mode)
-    "(Re)Set Bracketed Paste Mode
-    execute "silent !echo -ne '\033[?2004" . a:mode . "'"
-endfunction
+    autocmd VimEnter * :call Ms("disable")
+    autocmd VimLeave * :call Ms("enable")
 
-autocmd VimEnter * :call Ms("disable")
-autocmd VimLeave * :call Ms("enable")
+    nnoremap <leader>ms :call ToggleDisableTouch()<CR>
+endif
 
-"Toggle BPM when suspending (hook ctrl-z)
-nnoremap <silent> <C-z> :call SetBPM("l")<bar>:call Ms("enable")<CR>
-            \:suspend<bar>:call SetBPM("h")<bar>:call Ms("disable")<CR>
-            \:call SetColor()<CR>
-
-"Indentation settings
+" Indentation settings
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -194,7 +174,7 @@ set cindent
 set cinkeys-=0#
 set indentkeys-=0#
 
-"save backup, swap and undo in different directory
+" save backup, swap and undo in different directory
 let g:tmpDir=$HOME. "/.vim/tmp"
 let g:backupDir=g:tmpDir . "/backup//"
 let g:swapDir=g:tmpDir . "/swap//"
@@ -209,68 +189,68 @@ silent set backup
 silent set directory
 silent set undofile
 
-"Set color of tab bar
+" Set color of tab bar
 hi TabLineFill ctermfg=Black ctermbg=DarkGreen
 hi TabLine ctermfg=Grey ctermbg=Black
 hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
 
-"use tt to toggle tagbar
+" use tt to toggle tagbar
 nmap <Space><Space> :TagbarToggle<CR>
 
-"use Tab+space-space to toggle NERDtree
+" use Tab+space-space to toggle NERDtree
 nmap <Tab><Space> :NERDTree %<CR>
 
-"use Space+t to jump to tagbar
+" use Space+t to jump to tagbar
 nnoremap <Space>t :TagbarOpen fj<CR>
 
-"use shift+Tab+t to jump to NERDtree
+" use shift+Tab+t to jump to NERDtree
 nnoremap <Tab><Space>t :NERDTreeCWD<CR>
 
-"dont show '?' in NERDTree buffer
+" dont show '?' in NERDTree buffer
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
-"set paste-toggle to leader(backslash)-z
+" set paste-toggle to leader(backslash)-z
 set pastetoggle=<leader>z
 
-"use ctrl+h/l to switch between tabs
+" use ctrl+h/l to switch between tabs
 nnoremap <C-o> gT
 nnoremap <C-p> gt
 
-"use ctrl+p/o to cycle through panes
+" use ctrl+p/o to cycle through panes
 noremap <C-h> <C-w>h
 noremap <C-l> <C-w>l
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 
-" make saving easier
+"  make saving easier
 cnoremap W<CR> w<CR>
 cnoremap Wq<CR> wq<CR>
 cnoremap Wa<CR> wa<CR>
 
-"use shift+j/k to move pages in normal and visual mode
+" use shift+j/k to move pages in normal and visual mode
 nnoremap <S-k> 
 nnoremap <S-j> 
 vnoremap <S-k> 
 vnoremap <S-j> 
 
-"use shift+h/l to move word in normal and visual mode
+" use shift+h/l to move word in normal and visual mode
 nnoremap <S-h> b
 nnoremap <S-l> w
 vnoremap <S-h> b
 vnoremap <S-l> w
 
-"use ctrl+j/k to move window one line
-" nnoremap <C-j> <C-e>
-" nnoremap <C-k> <C-y>
+" use ctrl+j/k to move window one line
+"  nnoremap <C-j> <C-e>
+"  nnoremap <C-k> <C-y>
 
-"set <TAB><TAB> as additional 'ENTER'
+" set <TAB><TAB> as additional 'ENTER'
 nmap <TAB><TAB> <CR>
 
-"bind move to beginning of line command mode
+" bind move to beginning of line command mode
 cnoremap <C-a> <C-b>
 
-"use standard commenting 
+" use standard commenting 
 let s:comment_map = {
     \   "c": '\/\/ ',
     \   "cpp": '\/\/ ',
@@ -290,7 +270,7 @@ let s:comment_map = {
     \   ".vimrc": '" ',
     \ }
 
-"function for toggling comment 
+" function for toggling comment 
 function! CommentLine(toggle)
     if has_key(s:comment_map, &filetype)
         let l:comment_leader = s:comment_map[&filetype]
@@ -308,13 +288,13 @@ function! CommentLine(toggle)
     end
 endfunction
 
-"use leader(\)->Space to call ToggleComment
+" use leader(\)->Space to call ToggleComment
 nnoremap <leader><Space> :call CommentLine(1)<cr>
 vnoremap <leader><Space> :call CommentLine(1)<cr>
 nnoremap <leader><leader><Space> :call CommentLine(0)<cr>
 vnoremap <leader><leader><Space> :call CommentLine(0)<cr>
 
-"make ultisnips and YCM friends
+" make ultisnips and YCM friends
 let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
 function! ExpandSnippetOrCarriageReturn()
@@ -327,32 +307,32 @@ function! ExpandSnippetOrCarriageReturn()
 endfunction
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 
-"use python3 interpreter
-" let g:ycm_server_python_interpreter = 'usr/bin/python3'
-" let g:ycm_python_binary_path = '/usr/local/bin/python3'
+" use python3 interpreter
+"  let g:ycm_server_python_interpreter = 'usr/bin/python3'
+"  let g:ycm_python_binary_path = '/usr/local/bin/python3'
 
-"YCM semantic support
+" YCM semantic support
 let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 
 set shell=/bin/zsh
 
-"function to find current user
+" function to find current user
 function! GetUser()
     let currUser = substitute(system('whoami'), '\n', '', '')
     return currUser
 endfunction
 
-"set automatic preamble in .tex files (on linux)
+" set automatic preamble in .tex files (on linux)
 autocmd BufNewFile *.tex :r "/home/" . GetUser() . "/.vim/texPreamble"
 autocmd BufNewFile *.tex :set filetype=tex
 
-"function for setting tex directory
+" function for setting tex directory
 function! FindCurrDir()
     let currDir = getcwd()
     return currDir
 endfunction
 
-"function for setting specific tex directory
+" function for setting specific tex directory
 function! GetTexDir()
     let curLine = getline('.')
     call inputsave()
@@ -360,7 +340,7 @@ function! GetTexDir()
     return specDir
 endfunction
 
-"function for setting specific tex file (split compile) 
+" function for setting specific tex file (split compile) 
 function! GetTexFile()
     let curLine = getline('.')
     call inputsave()
@@ -368,7 +348,7 @@ function! GetTexFile()
     return specFile
 endfunction
 
-"set leader(\)->l to call pdflatex on current file (using pdflatex)
+" set leader(\)->l to call pdflatex on current file (using pdflatex)
 let g:dirTest = "none"
 let g:locCurrDir = FindCurrDir()
 let g:texDir = "none"
@@ -385,12 +365,12 @@ function! CompileTex()
 endfunction
 nnoremap <leader>l :call CompileTex()<CR>
 
-"function for resetting directory variable
+" function for resetting directory variable
 function! ReInitDir()
     let g:dirTest = "none"
 endfunction
 
-"function for cleaning temp-files
+" function for cleaning temp-files
 function! CleanTemp()
     let currUser = GetUser()
     execute "silent !(rm /home/" . currUser . "/.vim/tmp/backup/*)"
@@ -398,22 +378,22 @@ function! CleanTemp()
     execute "silent !(rm /home/" . currUser . "/.vim/tmp/undo/*)"
 endfunction
 
-"map <ctrl-ctrl> to copy to clipboard using xclip
+" map <ctrl-ctrl> to copy to clipboard using xclip
 vnoremap <C>yc :!xclip -i -sel clip<CR><CR>
 
-"map <S-insert> to xterm
+" map <S-insert> to xterm
 map <S-Insert> <MiddleMouse>
 
-"map increase/decrease width/height to Ctrl+arrows
+" map increase/decrease width/height to Ctrl+arrows
 map <C-left> :vertical resize +5<CR>
 map <C-right> :vertical resize -5<CR>
 map <C-up> :resize +5<CR>
 map <C-down> :resize -5<CR>
 
-"map ge to expand line
+" map ge to expand line
 vnoremap ge :%j<CR>
 
-"list of file extentions with headers
+" list of file extentions with headers
 let s:extensions = {
     \   'cpp' : ['.h', '.hpp'],
     \   'c' : ['.h'],
@@ -436,16 +416,16 @@ function! ToggleHeaderSource()
     endif
 endfunction
 
-"map ToggleHeaderSource to <leader>s
+" map ToggleHeaderSource to <leader>s
 map <leader>s :call ToggleHeaderSource()<CR>
 
-"map ctrl+md to show markdown
+" map ctrl+md to show markdown
 function! ShowFile()
     execute "!(google-chrome " . expand('%') . ")"
 endfunction
 cmap md :call ShowFile()<CR>
 
-"Ale settings
+" Ale settings
 let g:airline#extensions#ale#enabled = 1
 let b:ale_linters = {
 \    'python': ['pylint'],
