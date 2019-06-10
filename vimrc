@@ -390,6 +390,9 @@ map <C-right> :vertical resize -5<CR>
 map <C-up> :resize +5<CR>
 map <C-down> :resize -5<CR>
 
+" map leader+r to rotate window columns
+noremap <leader>r <C-w>r
+
 " map ge to expand line
 vnoremap ge :%j<CR>
 
