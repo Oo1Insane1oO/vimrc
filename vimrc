@@ -401,15 +401,15 @@ let s:extensions = {
     \   'hpp' : ['.cpp']
 \ }
 
-function! ToggleHeaderSource()
+function! ToggleHeaderSource(mode)
     let l:path = expand('%:h') . "/"
     let l:filename = expand('%:t:r')
     let l:extension = expand('%:e')
     if has_key(s:extensions, l:extension)
-        for a:k in s:extensions[l:extension]
-            let l:fileExtendedPath = l:path . l:filename . a:k
+        for l:k in s:extensions[l:extension]
+            let l:fileExtendedPath = l:path . l:filename . l:k
             if filereadable(l:fileExtendedPath)
-                execute "e " . l:fileExtendedPath
+                execute a:mode . " " . l:fileExtendedPath
                 break
             endif
         endfor
@@ -417,7 +417,9 @@ function! ToggleHeaderSource()
 endfunction
 
 " map ToggleHeaderSource to <leader>s
-map <leader>s :call ToggleHeaderSource()<CR>
+nnoremap <leader>s :call ToggleHeaderSource("e")<CR>
+nnoremap <leader>vs :call ToggleHeaderSource("vsplit")<CR>
+nnoremap <leader>hs :call ToggleHeaderSource("split")<CR>
 
 " map ctrl+md to show markdown
 function! ShowFile()
