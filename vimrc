@@ -121,20 +121,22 @@ autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 
 " touchpad behavior
 let g:toggleTouch = 1
-let g:touchpadID = system("echo $(xinput list | grep -i Touchpad | cut -d = -f2 | sed 's/[slave].*//' | sed 's/[^0-9]//g')")
+let g:touchpadID = substitute(system("xinput list | grep -i Touchpad | cut -d = -f2 | sed 's/[slave].*//' | sed 's/[^0-9]//g'"), '\n\+$', '', '')
 set mouse-=a
 
 function! Ms(mode)
     "set touchpad (mode=enable/disable)
     if g:toggleTouch && g:touchpadID != ""
-        call system("xinput --" . a:mode . " " . g:touchpadID . "> /dev/null/ 2>&1")
+        let job = job_start(["xinput", "--".a:mode, g:touchpadID],
+                            \ {"in_io": "null", "out_io": "null", "err_io": "null"})
     endif
 endfunction
 
 " Toggle BPM when subshelling (hook ctrl-z)
 function! SetBPM(mode)
     " (Re)Set Bracketed Paste Mode
-    execute "silent !echo -ne '\033[?2004" . a:mode . "'"
+    let job = job_start(["echo", "-ne", "'\033[?2004" . a:mode . "'"],
+	                    \ {"in_io": "null", "out_io": "null", "err_io": "null"})
 endfunction
 
 function! ToggleDisableTouch()
@@ -148,14 +150,15 @@ function! ToggleDisableTouch()
     endif
 endfunction
 
+function! AsyncToggleMs(bpm, mode)
+    " wrapper for calling bpm and ms routines
+    call SetBPM(a:bpm)
+    call Ms(a:mode)
+endfunction
+
 " toggle touchpad behaviour
 if g:touchpadID != ""
-    nnoremap <silent> <C-z> :call SetBPM("l")<bar>
-                           \:call Ms("enable")<CR>
-                           \:suspend<bar>
-                           \:call SetBPM("h")<bar>
-                           \:call Ms("disable")<CR>
-                           \:redraw!<CR>
+    nnoremap <silent> <C-z> :call AsyncToggleMs("l", "enable")<CR> :suspend<bar> :call AsyncToggleMs("h", "disable") <CR> :redraw!<CR>
 
     autocmd VimEnter * :call Ms("disable")
     autocmd VimLeave * :call Ms("enable")
