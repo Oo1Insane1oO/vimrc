@@ -319,6 +319,9 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 
 set shell=/bin/zsh
 
+" set tmp directory (used by tempname etc.)
+let $TMP = g:tmpDir . "/bin"
+
 " function to find current user
 function! GetUser()
     let currUser = substitute(system('whoami'), '\n', '', '')
@@ -445,6 +448,38 @@ let g:ale_lint_on_enter=0
 
 nmap <silent> <leader>n <Plug>(ale_previous_wrap)
 nmap <silent> <leader>m <Plug>(ale_next_wrap)
+
+" functions for running compilation with cmake in async
+function! CmakeExit(channel, msg)
+    " call make when Cmake is done and show output in same buffer
+    call job_start("make",
+                 \ {"in_io": "null",
+                  \ "out_io": "buffer",
+                  \ "out_name": g:makeOutputBuf,
+                  \ "err_io": "buffer",
+                  \ "err_name": g:makeOutputBuf})
+endfunction
+function! AsyncMake()
+    " function for running cmake and make in async and show output in buffer
+    let g:makeOutputBuf = tempname()
+    call job_start(["cmake", "."],
+                 \ {"in_io": "null",
+                  \ "out_io": "buffer",
+                  \ "out_name": g:makeOutputBuf,
+                  \ "err_io": "buffer",
+                  \ "err_name": g:makeOutputBuf,
+                  \ "exit_cb": "CmakeExit"})
+    execute 'setlocal buftype=""'
+    execute 'sbuf ' . g:makeOutputBuf
+    execute 'setlocal bufhidden=hide'
+    execute 'setlocal nobuflisted'
+    execute 'setlocal buftype=nofile'
+    execute 'res 10'
+endfunction
+
+" map leader+c to run AsyncMake and <leader>+qc to kill it
+nnoremap <leader>c :call AsyncMake()<CR>
+nnoremap <leader>qc :call job_stop(g:makeJob)<CR>
 
 " highlight angle brackets, double- and single quotes
 setglobal matchpairs+=<:>
