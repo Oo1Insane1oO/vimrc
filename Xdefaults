@@ -9,7 +9,6 @@ URxvt.scrollBar:            false
 URxvt.scrollBar_right:      false
 URxvt.scrollBar_floating:   false
 !URxvt.geometry:             240x84
-URxvt.borderless:           1
 URxvt.perl-lib:             /usr/lib/urxvt/perl/
 URxvt.urlLauncher:          /usr/bin/google-chrome-stable
 URxvt.matcher.button:       1
@@ -23,6 +22,7 @@ URxvt.perl-ext-common:      resize-font,keyboard-select,url-select,clipboard
 URxvt.internalBorder:       0
 URxvt.cursorColor:          #cccccc
 URxvt.cursorColor2:         #000000
+URxvt.buffered:             true
 
 URxvt.keysym.M-Down:        \033[1;3B
 URxvt.keysym.M-Up:          \033[1;3A
@@ -62,7 +62,7 @@ URxvt.color13:      #d175d1
 URxvt.color10:      #40bf40
 
 !string color (yellow)
-URxvt.color3:       #9f9f32
+URxvt.color3:       #dcdc4c
 
 !black
 URxvt.color0:       #000000
