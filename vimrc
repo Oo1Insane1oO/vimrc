@@ -19,6 +19,8 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'morhetz/gruvbox'
 Plugin 'wellle/targets.vim'
 Plugin 'w0rp/ale'
+Plugin 'junegunn/rainbow_parentheses.vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -450,6 +452,7 @@ nmap <silent> <leader>n <Plug>(ale_previous_wrap)
 nmap <silent> <leader>m <Plug>(ale_next_wrap)
 
 " functions for running compilation with cmake in async
+let g:makeOutputBuf = -1
 function! CmakeExit(channel, msg)
     " call make when Cmake is done and show output in same buffer
     call job_start("make",
@@ -461,20 +464,25 @@ function! CmakeExit(channel, msg)
 endfunction
 function! AsyncMake()
     " function for running cmake and make in async and show output in buffer
+    let l:makeOutputBufWinnr = bufwinnr(g:makeOutputBuf)
+    if l:makeOutputBufWinnr != -1
+        execute ':q ' . l:makeOutputBufWinnr
+    endif
     let g:makeOutputBuf = tempname()
-    call job_start(["cmake", "."],
-                 \ {"in_io": "null",
-                  \ "out_io": "buffer",
-                  \ "out_name": g:makeOutputBuf,
-                  \ "err_io": "buffer",
-                  \ "err_name": g:makeOutputBuf,
-                  \ "exit_cb": "CmakeExit"})
-    execute 'setlocal buftype=""'
+    let g:makeJob = job_start(["cmake", "."],
+                            \ {"in_io": "null",
+                             \ "out_io": "buffer",
+                             \ "out_name": g:makeOutputBuf,
+                             \ "err_io": "buffer",
+                             \ "err_name": g:makeOutputBuf,
+                             \ "exit_cb": "CmakeExit"})
+    execute 'setlocal buftype="quickfix"'
     execute 'sbuf ' . g:makeOutputBuf
     execute 'setlocal bufhidden=hide'
     execute 'setlocal nobuflisted'
     execute 'setlocal buftype=nofile'
     execute 'res 10'
+    execute ':wincmd p'
 endfunction
 
 " map leader+c to run AsyncMake and <leader>+qc to kill it
