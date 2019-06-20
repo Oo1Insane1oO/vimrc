@@ -447,6 +447,7 @@ let b:ale_linters = {
 let g:ale_cpp_clang_options="-I/usr/include/eigen3/ -I/usr/include/ -L/usr/lib/ -std=c++17 -Wall"
 let g:ale_completion_enabled=1
 let g:ale_lint_on_enter=0
+let g:ale_lint_on_text_changed='never'
 
 nmap <silent> <leader>n <Plug>(ale_previous_wrap)
 nmap <silent> <leader>m <Plug>(ale_next_wrap)
@@ -464,7 +465,7 @@ function! CloseMakeBufwinnr()
 endfunction
 function! CmakeExit(channel, msg)
     " call make when Cmake is done and show output in same buffer
-    let g:makeJob =  job_start("make",
+    let g:makeJob =  job_start(["make", "-C", "build"],
                                \ {"in_io": "null",
                                 \ "out_io": "buffer",
                                 \ "out_name": g:makeOutputBuf,
@@ -475,7 +476,7 @@ function! AsyncMake()
     " function for running cmake and make in async and show output in buffer
     silent call CloseMakeBufwinnr()
     let g:makeOutputBuf = tempname()
-    let g:cmakeJob = job_start(["cmake", "."],
+    let g:cmakeJob = job_start(["cmake", ".", "-B", "build"],
                              \ {"in_io": "null",
                               \ "out_io": "buffer",
                               \ "out_name": g:makeOutputBuf,
@@ -518,3 +519,9 @@ nnoremap vtt :vertical terminal <CR>
 " rainbow parantheses settings
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['<', '>']]
 let g:rainbow#blacklist = [233, 234]
+
+function! ToggleSnakeCamel()
+    " toggle between snake- and camel case
+    execute 'silent s/_\u*/&U/'
+    execute 'silent s/\u\S*/_&u/'
+endfunction
