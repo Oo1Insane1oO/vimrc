@@ -453,29 +453,35 @@ nmap <silent> <leader>m <Plug>(ale_next_wrap)
 
 " functions for running compilation with cmake in async
 let g:makeOutputBuf = -1
-function! CmakeExit(channel, msg)
-    " call make when Cmake is done and show output in same buffer
-    call job_start("make",
-                 \ {"in_io": "null",
-                  \ "out_io": "buffer",
-                  \ "out_name": g:makeOutputBuf,
-                  \ "err_io": "buffer",
-                  \ "err_name": g:makeOutputBuf})
-endfunction
-function! AsyncMake()
-    " function for running cmake and make in async and show output in buffer
+let g:cmakeJob = -1
+let g:makeJob = -1
+function! CloseMakeBufwinnr()
+    " close make output buffer if open
     let l:makeOutputBufWinnr = bufwinnr(g:makeOutputBuf)
     if l:makeOutputBufWinnr != -1
         execute ':q ' . l:makeOutputBufWinnr
     endif
+endfunction
+function! CmakeExit(channel, msg)
+    " call make when Cmake is done and show output in same buffer
+    let g:makeJob =  job_start("make",
+                               \ {"in_io": "null",
+                                \ "out_io": "buffer",
+                                \ "out_name": g:makeOutputBuf,
+                                \ "err_io": "buffer",
+                                \ "err_name": g:makeOutputBuf})
+endfunction
+function! AsyncMake()
+    " function for running cmake and make in async and show output in buffer
+    silent call CloseMakeBufwinnr()
     let g:makeOutputBuf = tempname()
-    let g:makeJob = job_start(["cmake", "."],
-                            \ {"in_io": "null",
-                             \ "out_io": "buffer",
-                             \ "out_name": g:makeOutputBuf,
-                             \ "err_io": "buffer",
-                             \ "err_name": g:makeOutputBuf,
-                             \ "exit_cb": "CmakeExit"})
+    let g:cmakeJob = job_start(["cmake", "."],
+                             \ {"in_io": "null",
+                              \ "out_io": "buffer",
+                              \ "out_name": g:makeOutputBuf,
+                              \ "err_io": "buffer",
+                              \ "err_name": g:makeOutputBuf,
+                              \ "exit_cb": "CmakeExit"})
     execute 'setlocal buftype="quickfix"'
     execute 'sbuf ' . g:makeOutputBuf
     execute 'setlocal bufhidden=hide'
@@ -484,10 +490,21 @@ function! AsyncMake()
     execute 'res 10'
     execute ':wincmd p'
 endfunction
+function! TerminateMake()
+    " either stop make job(either one of cmake and make) if still active or close buffer if jobs
+    " are finished
+    if job_status(g:cmakeJob) == "run"
+        call job_stop(g:cmakeJob)
+    elseif job_status(g:makeJob) == "run"
+        call job_stop(g:makeJob)
+    else
+        silent call CloseMakeBufwinnr()
+    endif
+endfunction
 
 " map leader+c to run AsyncMake and <leader>+qc to kill it
-nnoremap <leader>c :call AsyncMake()<CR>
-nnoremap <leader>qc :call job_stop(g:makeJob)<CR>
+nnoremap <silent> <leader>c :call AsyncMake()<CR>
+nnoremap <silent> <leader>qc :call TerminateMake()<CR>
 
 " highlight angle brackets, double- and single quotes
 setglobal matchpairs+=<:>
