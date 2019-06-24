@@ -279,12 +279,12 @@ let s:comment_map = {
 function! CommentLine(toggle)
     if has_key(s:comment_map, &filetype)
         let l:comment_leader = s:comment_map[&filetype]
-        if (a:toggle == 1) && (getline('.') =~ "\s*" . l:comment_leader)
+        if (a:toggle == 1) && (getline('.') =~ "^ *" . l:comment_leader)
             " Uncomment the line
-            execute 'silent s/' . l:comment_leader . '//'
+            execute 'silent s/' . l:comment_leader . '\+//'
         elseif (a:toggle == 0) && (getline('.') !~ "\s*" . l:comment_leader)
             execute 'silent s/\S\|$/' . l:comment_leader . '&/'
-        elseif  (a:toggle == 1) && (getline('.') !~ "\s*" . l:comment_leader)
+        elseif  (a:toggle == 1) && (getline('.') !~ "\s\+" . l:comment_leader)
             " Comment the line
             execute 'silent s/\S\|$/' . l:comment_leader . '&/'
         endif
@@ -444,7 +444,7 @@ let b:ale_linters = {
 \    'python': ['pylint'],
 \    'C++': ['clang'],
 \ }
-let g:ale_cpp_clang_options="-I/usr/include/eigen3/ -I/usr/include/ -L/usr/lib/ -std=c++17 -Wall"
+let g:ale_cpp_clang_options="-I/usr/include/ -L/usr/lib/ -std=c++17 -Wall"
 let g:ale_completion_enabled=1
 let g:ale_lint_on_enter=0
 let g:ale_lint_on_text_changed='never'
