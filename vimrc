@@ -319,6 +319,9 @@ inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" 
 " YCM semantic support
 let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 
+" Disable error
+let g:ycm_show_diagnostics_ui = 0
+
 set shell=/bin/zsh
 
 " set tmp directory (used by tempname etc.)
@@ -442,12 +445,20 @@ cmap md :call ShowFile()<CR>
 let g:airline#extensions#ale#enabled = 1
 let b:ale_linters = {
 \    'python': ['pylint'],
-\    'C++': ['clang'],
+\    'cpp': ['clang'],
 \ }
-let g:ale_cpp_clang_options="-I/usr/include/ -L/usr/lib/ -std=c++17 -Wall"
+let g:ale_pattern_options = {
+\   '\.hpp$': {
+\       'ale_linters' : ['clangcheck'],
+\       'ale_fixers' : ['clangformat'],
+\   },
+\   '\.cpp$': {
+\       'ale_linters' : ['clangcheck'],
+\       'ale_fixers' : ['clangformat'],
+\   },
+\ }
 let g:ale_completion_enabled=1
 let g:ale_lint_on_enter=0
-let g:ale_lint_on_text_changed='never'
 
 nmap <silent> <leader>n <Plug>(ale_previous_wrap)
 nmap <silent> <leader>m <Plug>(ale_next_wrap)
