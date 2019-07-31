@@ -50,7 +50,7 @@ beautiful.icon_theme        = "Papirus-Dark"
 -- beautiful.notification_font = "DejaVu Sans Mono 14"
 
 -- This is used later as the default terminal and editor to run.
-browser = "google-chrome-stable" or "exo-open --launch WebBrowser"
+browser = "vivaldi-stable" or "exo-open --launch WebBrowser"
 filemanager = "exo-open --launch FileManager" or "thunar"
 gui_editor = "mousepad"
 terminal = "urxvtc" or os.getenv("TERMINAL")
