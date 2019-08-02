@@ -474,6 +474,15 @@ function! CloseMakeBufwinnr()
         execute ':q ' . l:makeOutputBufWinnr
     endif
 endfunction
+function! MakeExit(channel, msg)
+    " call make when Cmake is done and show output in same buffer
+    let g:testJob =  job_start(["make", "-C", "build", "test", "ARGS=-j" . system('nproc --all')],
+                               \ {"in_io": "null",
+                                \ "out_io": "buffer",
+                                \ "out_name": g:makeOutputBuf,
+                                \ "err_io": "buffer",
+                                \ "err_name": g:makeOutputBuf})
+endfunction
 function! CmakeExit(channel, msg)
     " call make when Cmake is done and show output in same buffer
     let g:makeJob =  job_start(["make", "-C", "build"],
@@ -481,7 +490,8 @@ function! CmakeExit(channel, msg)
                                 \ "out_io": "buffer",
                                 \ "out_name": g:makeOutputBuf,
                                 \ "err_io": "buffer",
-                                \ "err_name": g:makeOutputBuf})
+                                \ "err_name": g:makeOutputBuf,
+                                \ "exit_cb": "MakeExit"})
 endfunction
 function! AsyncMake()
     " function for running cmake and make in async and show output in buffer
@@ -509,6 +519,8 @@ function! TerminateMake()
         call job_stop(g:cmakeJob)
     elseif job_status(g:makeJob) == "run"
         call job_stop(g:makeJob)
+    elseif job_status(g:testJob) == "run"
+        call job_stop(g:testJob)
     else
         silent call CloseMakeBufwinnr()
     endif
