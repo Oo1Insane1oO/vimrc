@@ -476,7 +476,7 @@ function! CloseMakeBufwinnr()
 endfunction
 function! MakeExit(channel, msg)
     " call make when Cmake is done and show output in same buffer
-    let g:testJob = job_start(["make", "-C", "build", "test", "ARGS=-j" . system("nproc --all")],
+    let g:testJob = job_start(["env", "CMAKE_OUTPUT_ON_FAILURE=1", "make", "-C", "build", "test", "ARGS=-j" . system("nproc --all")],
                                \ {"in_io": "null",
                                 \ "out_io": "buffer",
                                 \ "out_name": g:makeOutputBuf,
