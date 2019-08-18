@@ -473,10 +473,11 @@ function! CloseMakeBufwinnr()
     if l:makeOutputBufWinnr != -1
         execute ':q ' . l:makeOutputBufWinnr
     endif
+    let g:makeOutputBuf = -1
 endfunction
 function! MakeExit(channel, msg)
     " call make when Cmake is done and show output in same buffer
-    let g:testJob = job_start(["env", "CMAKE_OUTPUT_ON_FAILURE=1", "make", "-C", "build", "test", "ARGS=-j" . system("nproc --all")],
+    let g:testJob = job_start(["env", "CTEST_OUTPUT_ON_FAILURE=1", "make", "-C", "build", "test", "ARGS=-j" . system("nproc --all")],
                                \ {"in_io": "null",
                                 \ "out_io": "buffer",
                                 \ "out_name": g:makeOutputBuf,
@@ -495,8 +496,10 @@ function! CmakeExit(channel, msg)
 endfunction
 function! AsyncMake()
     " function for running cmake and make in async and show output in buffer
-    silent call CloseMakeBufwinnr()
-    let g:makeOutputBuf = tempname()
+    " silent call CloseMakeBufwinnr()
+    if g:makeOutputBuf == -1
+        let g:makeOutputBuf = tempname()
+    endif
     let g:cmakeJob = job_start(["cmake", ".", "-B", "build"],
                              \ {"in_io": "null",
                               \ "out_io": "buffer",
@@ -504,13 +507,15 @@ function! AsyncMake()
                               \ "err_io": "buffer",
                               \ "err_name": g:makeOutputBuf,
                               \ "exit_cb": "CmakeExit"})
-    execute 'setlocal buftype="quickfix"'
-    execute 'sbuf ' . g:makeOutputBuf
-    execute 'setlocal bufhidden=hide'
-    execute 'setlocal nobuflisted'
-    execute 'setlocal buftype=nofile'
-    execute 'res 10'
-    execute ':wincmd p'
+    if bufwinnr(g:makeOutputBuf) == -1
+        execute 'setlocal buftype="quickfix"'
+        execute 'sbuf ' . g:makeOutputBuf
+        execute 'setlocal bufhidden=hide'
+        execute 'setlocal nobuflisted'
+        execute 'setlocal buftype=nofile'
+        execute 'res 10'
+        execute ':wincmd p'
+    endif
 endfunction
 function! TerminateMake()
     " either stop make job(either one of cmake and make) if still active or close buffer if jobs
@@ -528,7 +533,7 @@ endfunction
 
 " map leader+c to run AsyncMake and <leader>+qc to kill it
 nnoremap <silent> <leader>c :call AsyncMake()<CR>
-nnoremap <silent> <leader>qc :call TerminateMake()<CR>
+nnoremap <silent> <leader>qc :call TerminateMake()<CR> :call CloseMakeBufwinnr()<CR>
 
 " highlight angle brackets, double- and single quotes
 setglobal matchpairs+=<:>
