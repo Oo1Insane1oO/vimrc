@@ -222,11 +222,11 @@ set pastetoggle=<leader>z
 nnoremap <C-o> gT
 nnoremap <C-p> gt
 
-" use ctrl+p/o to cycle through panes
-noremap <C-h> <C-w>h
-noremap <C-l> <C-w>l
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
+" use ctrl+h/l/j/k to cycle through panes
+noremap <C-h> :wincmd h<CR>
+noremap <C-l> :wincmd l<CR>
+noremap <C-j> :wincmd j<CR>
+noremap <C-k> :wincmd k<CR>
 
 "  make saving easier
 cnoremap W<CR> w<CR>
@@ -500,7 +500,7 @@ function! AsyncMake()
     if g:makeOutputBuf == -1
         let g:makeOutputBuf = tempname()
     endif
-    let g:cmakeJob = job_start(["cmake", ".", "-B", "build"],
+    let g:cmakeJob = job_start(["env", "CMAKE_BUILD_PARALLEL_LEVEL=".system("nproc --all")." ", "cmake", ".", "-B", "build"],
                              \ {"in_io": "null",
                               \ "out_io": "buffer",
                               \ "out_name": g:makeOutputBuf,
