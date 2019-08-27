@@ -223,10 +223,10 @@ nnoremap <C-o> gT
 nnoremap <C-p> gt
 
 " use ctrl+h/l/j/k to cycle through panes
-noremap <C-h> :wincmd h<CR>
-noremap <C-l> :wincmd l<CR>
-noremap <C-j> :wincmd j<CR>
-noremap <C-k> :wincmd k<CR>
+noremap <silent> <C-h> :wincmd h<CR>
+noremap <silent> <C-l> :wincmd l<CR>
+noremap <silent> <C-j> :wincmd j<CR>
+noremap <silent> <C-k> :wincmd k<CR>
 
 "  make saving easier
 cnoremap W<CR> w<CR>
