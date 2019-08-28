@@ -13,9 +13,7 @@ Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'morhetz/gruvbox'
 Plugin 'wellle/targets.vim'
 Plugin 'w0rp/ale'
@@ -202,18 +200,18 @@ hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
 " use tt to toggle tagbar
 nmap <Space><Space> :TagbarToggle<CR>
 
-" use Tab+space-space to toggle NERDtree
-nmap <Tab><Space> :NERDTree %<CR>
+" file explorer settings
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+
+" use Tab+space-space to toggle netrw
+nmap <Tab><Space> :Vexplore<CR>
 
 " use Space+t to jump to tagbar
 nnoremap <Space>t :TagbarOpen fj<CR>
-
-" use shift+Tab+t to jump to NERDtree
-nnoremap <Tab><Space>t :NERDTreeCWD<CR>
-
-" dont show '?' in NERDTree buffer
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
 
 " set paste-toggle to leader(backslash)-z
 set pastetoggle=<leader>z
