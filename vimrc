@@ -455,7 +455,6 @@ let g:ale_pattern_options = {
 \       'ale_fixers' : ['clangformat'],
 \   },
 \ }
-let g:ale_completion_enabled=1
 let g:ale_lint_on_enter=0
 
 nmap <silent> <leader>n <Plug>(ale_previous_wrap)
