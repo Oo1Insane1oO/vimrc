@@ -208,7 +208,7 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 50
 
 " use Tab+space-space to toggle netrw
-nmap <Tab><Space> :Vexplore<CR>
+nmap <Tab><Space> :Lexplore<CR>
 
 " use Space+t to jump to tagbar
 nnoremap <Space>t :TagbarOpen fj<CR>
