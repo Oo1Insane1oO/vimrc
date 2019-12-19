@@ -1,32 +1,28 @@
 runtime!archlinux.vim
 
-set nocompatible "required for Vundlefiletype off "required for Vundle
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+Plug 'Valloric/YouCompleteMe'
+Plug 'majutsushi/tagbar'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'morhetz/gruvbox'
+Plug 'wellle/targets.vim'
+Plug 'w0rp/ale'
+Plug 'junegunn/rainbow_parentheses.vim'
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'majutsushi/tagbar'
-Plugin 'sirver/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'tpope/vim-fugitive'
-Plugin 'morhetz/gruvbox'
-Plugin 'wellle/targets.vim'
-Plugin 'w0rp/ale'
-Plugin 'junegunn/rainbow_parentheses.vim'
+call plug#end()
 
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required To ignore plugin indent changes, instead use:
+" Determine filetype and enable auto-indent
+filetype indent plugin on
 filetype plugin on
 
-" Enable syntax highlighting
+" Enable Syntax highlighting
 syntax enable
+syntax on
 
 " Set background dark
 set background=dark
@@ -44,12 +40,6 @@ let g:airline#extensions#tabline#enabled = 1
 
 " set airline theme
 let g:airline_theme="onedark"
-
-" Determine filetype and enable auto-indent
-filetype indent plugin on
-
-" Enable Syntax highlighting
-syntax on
 
 " set linebreak to 100 chars
 set textwidth=99
@@ -551,3 +541,9 @@ function! ToggleSnakeCamel()
     execute 'silent s/_\u*/&U/'
     execute 'silent s/\u\S*/_&u/'
 endfunction
+
+if &term =~ '256color'
+    "Disable Background Color Erase (BCE) so hat color schemes
+    "work properly when Vim is used inside tmus and GNU screen
+    set t_ut=
+endif
