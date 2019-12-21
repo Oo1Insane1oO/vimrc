@@ -117,7 +117,7 @@ augroup END
 
 " touchpad behavior
 let g:toggleTouch = 1
-let g:touchpadID = substitute(system("xinput list | grep -i Touchpad | cut -d = -f2 | sed 's/[slave].*//' | sed 's/[^0-9]//g'"), '\n\+$', '', '')
+let g:touchpadID = substitute(system("xinput list | grep -i touchpad"), "^.*id=\\([0-9]\\+\\).*$", "\\1", "")
 set mouse-=a
 
 function! Ms(mode)
@@ -156,8 +156,11 @@ endfunction
 if g:touchpadID != ""
     nnoremap <silent> <C-z> :call AsyncToggleMs("l", "enable")<CR> :suspend<bar> :call AsyncToggleMs("h", "disable") <CR> :redraw!<CR>
 
-    autocmd VimEnter * :call Ms("disable")
-    autocmd VimLeave * :call Ms("enable")
+    augroup ms_enable_disable
+        autocmd!
+        autocmd VimEnter * :call Ms("disable")
+        autocmd VimLeave * :call Ms("enable")
+    augroup END
 
     nnoremap <leader>ms :call ToggleDisableTouch()<CR>
 endif
