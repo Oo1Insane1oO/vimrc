@@ -68,7 +68,10 @@ nnoremap <CR> :noh<CR><CR>
 set incsearch
 
 " Disable auto commenting
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+augroup filetype_local
+    autocmd!
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+augroup END
 
 " Case insensitive search
 set ignorecase
@@ -107,7 +110,10 @@ set splitright
 set splitbelow
 
 " fix slow tagbar
-autocmd FileType tagbar setlocal nocursorline nocursorcolumn
+augroup filetype_tagbar
+    autocmd!
+    autocmd FileType tagbar setlocal nocursorline nocursorcolumn
+augroup END
 
 " touchpad behavior
 let g:toggleTouch = 1
@@ -172,9 +178,19 @@ let g:tmpDir=$HOME. "/.vim/tmp"
 let g:backupDir=g:tmpDir . "/backup//"
 let g:swapDir=g:tmpDir . "/swap//"
 let g:undoDir=g:tmpDir . "/undo//"
-call system("mkdir -p " . g:backupDir)
-call system("mkdir -p " . g:swapDir)
-call system("mkdir -p " . g:undoDir)
+
+function! CreateTmpDirs()
+    " create temporary directories if non-existing
+    execute "silent !(mkdir -p " . g:backupDir . ")"
+    execute "silent !(mkdir -p " . g:swapDir . ")"
+    execute "silent !(mkdir -p " . g:undoDir . ")"
+endfunction
+
+augroup create_tmp_dir
+    autocmd!
+    autocmd VimEnter * :call CreateTmpDirs()
+augroup END
+
 let &backupdir=g:backupDir
 let &directory=g:swapDir
 let &undodir=g:undoDir
@@ -322,8 +338,11 @@ function! GetUser()
 endfunction
 
 " set automatic preamble in .tex files (on linux)
-autocmd BufNewFile *.tex :r "/home/" . GetUser() . "/.vim/texPreamble"
-autocmd BufNewFile *.tex :set filetype=tex
+augroup buf_new_file_tex
+    autocmd!
+    autocmd BufNewFile *.tex :r "/home/" . GetUser() . "/.vim/texPreamble"
+    autocmd BufNewFile *.tex :set filetype=tex
+augroup END
 
 " function for setting tex directory
 function! FindCurrDir()
