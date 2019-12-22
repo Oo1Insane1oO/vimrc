@@ -569,3 +569,6 @@ if &term =~ '256color'
     "work properly when Vim is used inside tmus and GNU screen
     set t_ut=
 endif
+
+" map // to search for visual selected text
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
