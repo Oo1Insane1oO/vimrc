@@ -35,11 +35,35 @@ colorscheme gruvbox
 " gruvbox configuration
 let g:gruvbox_contrast_dark = "medium"
 
-" Enable buffer list from airline
-let g:airline#extensions#tabline#enabled = 1
+" Airline
+let g:airline_powerline_fonts = 1
 
-" set airline theme
-let g:airline_theme="onedark"
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme="gruvbox"
 
 " set linebreak to 100 chars
 set textwidth=99
@@ -117,14 +141,15 @@ augroup END
 
 " touchpad behavior
 let g:toggleTouch = 1
-let g:touchpadID = substitute(system("xinput list | grep -i touchpad"), "^.*id=\\([0-9]\\+\\).*$", "\\1", "")
 set mouse-=a
 
 function! Ms(mode)
     "set touchpad (mode=enable/disable)
-    if g:toggleTouch && g:touchpadID != ""
-        let job = job_start(["xinput", "--".a:mode, g:touchpadID],
-                            \ {"in_io": "null", "out_io": "null", "err_io": "null"})
+    if g:toggleTouch
+        let l:touch_id_command = '$(xinput list | grep -i touchpad | sed -nE "s/^.+id=([0-9]+).+$/\1/p")'
+        let job = job_start(["/bin/sh", "-c", "xinput --" . a:mode . " " . touch_id_command],
+                            \ {"in_io": "null", "out_io": "null", "err_io": "null",
+                            \  "in_mode": "raw", "out_mode": "raw", "err_mode": "raw"})
     endif
 endfunction
 
@@ -153,17 +178,15 @@ function! AsyncToggleMs(bpm, mode)
 endfunction
 
 " toggle touchpad behaviour
-if g:touchpadID != ""
-    nnoremap <silent> <C-z> :call AsyncToggleMs("l", "enable")<CR> :suspend<bar> :call AsyncToggleMs("h", "disable") <CR> :redraw!<CR>
+nnoremap <silent> <C-z> :call AsyncToggleMs("l", "enable")<CR> :suspend<bar> :call AsyncToggleMs("h", "disable") <CR> :redraw!<CR>
 
-    augroup ms_enable_disable
-        autocmd!
-        autocmd VimEnter * :call Ms("disable")
-        autocmd VimLeave * :call Ms("enable")
-    augroup END
+augroup ms_enable_disable
+    autocmd!
+    autocmd VimEnter * :call Ms("disable")
+    autocmd VimLeave * :call Ms("enable")
+augroup END
 
-    nnoremap <leader>ms :call ToggleDisableTouch()<CR>
-endif
+nnoremap <leader>ms :call ToggleDisableTouch()<CR>
 
 " Indentation settings
 set shiftwidth=4

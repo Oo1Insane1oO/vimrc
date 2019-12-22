@@ -3,7 +3,7 @@ Xft.antialias:       true
 Xft.hinting:         true
 Xft.hintingstyle:    full
 
-URxvt.font:                 xft:inconsolata:size=14:antialias=true,xft:DejaVu Sans Mono:size=14:antialias=true,xft:Sauce Code Powerline:antialias=true:hinting=true:size=12
+URxvt.font:                 xft:DejaVu Sans Mono for Powerline:pixelsize=17:antialias=true
 URxvt.termName:             rxvt
 URxvt.scrollBar:            false
 URxvt.scrollBar_right:      false
