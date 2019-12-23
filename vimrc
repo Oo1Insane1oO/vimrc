@@ -3,7 +3,7 @@ runtime!archlinux.vim
 call plug#begin('~/.vim/plugged')
 
 Plug 'Valloric/YouCompleteMe'
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'bling/vim-airline'
@@ -62,8 +62,17 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline_theme="gruvbox"
+
+" enable airline extensions
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#ale#enabled = 1
+  
+" disable airline extensions
+let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#ycm#enabled = 0
 
 " set linebreak to 100 chars
 set textwidth=99
@@ -475,7 +484,6 @@ endfunction
 cmap md :call ShowFile()<CR>
 
 " Ale settings
-let g:airline#extensions#ale#enabled = 1
 let b:ale_linters = {
 \    'python': ['pylint'],
 \    'cpp': ['clang'],
