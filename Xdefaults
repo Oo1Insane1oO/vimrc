@@ -3,14 +3,14 @@ Xft.antialias:       true
 Xft.hinting:         true
 Xft.hintingstyle:    full
 
-URxvt.font:                 xft:DejaVu Sans Mono for Powerline:pixelsize=17:antialias=true
+URxvt.font:                 xft:DejaVu Sans Mono for Powerline:pixelsize=14:antialias=true
 URxvt.termName:             rxvt
 URxvt.scrollBar:            false
 URxvt.scrollBar_right:      false
 URxvt.scrollBar_floating:   false
 !URxvt.geometry:             240x84
 URxvt.perl-lib:             /usr/lib/urxvt/perl/
-URxvt.urlLauncher:          /usr/bin/google-chrome-stable
+URxvt.urlLauncher:          /usr/bin/firefox
 URxvt.matcher.button:       1
 URxvt.iconFile:             /home/saintz/.local/share/icons/OieIcons/scalable/apps/lxterminal.svg
 URxvt.foreground:           #ffffff
@@ -19,7 +19,8 @@ URxvt.fadeColor:            #000000
 URxvt.depth:                32
 URxvt.background:           [65]#23140b
 URxvt.perl-ext-common:      resize-font,keyboard-select,url-select,clipboard
-URxvt.internalBorder:       0
+URxvt.internalBorder:       0px
+URxvt.externalBorder:       0px
 URxvt.cursorColor:          #cccccc
 URxvt.cursorColor2:         #000000
 URxvt.buffered:             true
