@@ -6,8 +6,6 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'majutsushi/tagbar', {'on': 'TagbarToggle'}
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
 Plug 'wellle/targets.vim'
@@ -34,48 +32,112 @@ colorscheme gruvbox
 
 " gruvbox configuration
 let g:gruvbox_contrast_dark = "medium"
-
+" 
 " Airline
-let g:airline_powerline_fonts = 1
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
+" let g:airline_powerline_fonts = 1
+" 
+" if !exists('g:airline_symbols')
+    " let g:airline_symbols = {}
+" endif
+" 
 " unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.whitespace = 'Ξ'
+" 
 " airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-let g:airline_theme="gruvbox"
-
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = ''
+" 
+" let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+" let g:airline_theme="gruvbox"
+" 
 " enable airline extensions
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#ale#enabled = 1
-  
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#branch#enabled = 1
+" let g:airline#extensions#ale#enabled = 1
+  " 
 " disable airline extensions
-let g:airline#extensions#tagbar#enabled = 0
-let g:airline#extensions#ycm#enabled = 0
+" let g:airline#extensions#tagbar#enabled = 0
+" let g:airline#extensions#ycm#enabled = 0
+
+function! StatuslineGit()
+  let l:branchname = FugitiveHead()
+  return strlen(l:branchname) > 0 ? ' '.l:branchname.' ' : ''
+endfunction
+
+function! ReducedCWD()
+    let l:curr_dir = split(substitute(getcwd(), $HOME, 'Ξ', ''), '/\zs')
+    return l:curr_dir[0] . join(map(l:curr_dir[1:], {_, val -> val[0]}))
+endfunction
+
+function! CheckModified()
+    if !&modifiable
+        return ''
+    elseif &modified
+        return '[+]'
+    else
+        return ''
+    endif
+endfunction
+
+" statusline settings
+set laststatus=2
+
+set statusline=
+
+set statusline+=%#PmenuSel#
+set statusline+=%{StatuslineGit()}
+set statusline+=\ 
+
+set statusline+=%#DiffChange# " teal
+set statusline+=\ %f
+set statusline+=\ 
+
+set statusline+=%#DiffDelete# " red
+set statusline+=%{CheckModified()}
+
+set statusline+=%#Pmenu# " grey
+set statusline+=\ 
+
+set statusline+=%=
+
+set statusline+=%#DiffDelete# " red
+set statusline+=\ %l:%c
+set statusline+=\ 
+
+set statusline+=%#IncSearch# " orange
+set statusline+=\ %p%%
+set statusline+=\ 
+
+set statusline+=%#DiffText# " yellow
+set statusline+=\ \[%{ReducedCWD()}\]
+set statusline+=\ 
+
+set statusline+=%#DiffAdd# " green
+set statusline+=\ %y
+set statusline+=\ 
+
+set statusline+=%#PmenuSel# " blue
+set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+set statusline+=\ 
+
+set statusline+=%#Visual# " white
+set statusline+=\|
 
 " set linebreak to 100 chars
-set textwidth=99
+set textwidth=100
 
 " dont automatically break text, but rather wrap
 set wrap linebreak nolist
