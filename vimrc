@@ -78,7 +78,7 @@ function! StatuslineGit()
 endfunction
 
 function! ReducedCWD()
-    let l:curr_dir = split(substitute(getcwd(), $HOME, 'Ξ', ''), '/\zs')
+    let l:curr_dir = split(substitute(getcwd(), $HOME, 'ℍ', ''), '/\zs')
     return l:curr_dir[0] . join(map(l:curr_dir[1:], {_, val -> val[0]}))
 endfunction
 
@@ -86,39 +86,64 @@ function! CheckModified()
     if !&modifiable
         return ''
     elseif &modified
-        return '[+]'
+        return '✚'
     else
         return ''
     endif
 endfunction
+
+function! GetTouchToggleStatus()
+    return g:toggleTouch && job_info(g:ms_job)["exitval"] == 0 ? "\u211A\u0338" : "\u211A" 
+endfunction
+
+let g:currentmode={
+       \ 'n'  : 'NORMAL ',
+       \ 'v'  : 'VISUAL ',
+       \ 'V'  : 'V·Line ',
+       \ '' : 'V·Block ',
+       \ 'i'  : 'INSERT ',
+       \ 'R'  : 'R ',
+       \ 'Rv' : 'V·Replace ',
+       \ 'c'  : 'Command ',
+       \}
+
+" custom colors
+hi User1 ctermbg=239 ctermfg=167
+hi User2 ctermbg=109 ctermfg=234
+hi User3 ctermbg=24 ctermfg=234
+hi User4 ctermbg=66 ctermfg=234
 
 " statusline settings
 set laststatus=2
 
 set statusline=
 
-set statusline+=%#PmenuSel#
-set statusline+=%{StatuslineGit()}
+set statusline+=%3* " blue3 / grey
+set statusline+=\ %{StatuslineGit()}
 set statusline+=\ 
 
-set statusline+=%#DiffChange# " teal
+set statusline+=%4* " blue2 / grey
 set statusline+=\ %f
 set statusline+=\ 
 
 set statusline+=%#DiffDelete# " red
 set statusline+=%{CheckModified()}
 
-set statusline+=%#Pmenu# " grey
-set statusline+=\ 
+set statusline+=%2* " blue
+set statusline+=\ %{toupper(g:currentmode[mode()])}
 
+set statusline+=%#WildMenu# " blue/grey
+set statusline+=
 set statusline+=%=
+set statusline+=%1* " grey/red
+set statusline+=
 
 set statusline+=%#DiffDelete# " red
-set statusline+=\ %l:%c
+set statusline+=\ %p%%\|%l:%c\|%LΞ
 set statusline+=\ 
 
 set statusline+=%#IncSearch# " orange
-set statusline+=\ %p%%
+set statusline+=\ %{GetTouchToggleStatus()}
 set statusline+=\ 
 
 set statusline+=%#DiffText# " yellow
@@ -129,12 +154,9 @@ set statusline+=%#DiffAdd# " green
 set statusline+=\ %y
 set statusline+=\ 
 
-set statusline+=%#PmenuSel# " blue
+set statusline+=%#DiffChange# " teal
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\ 
-
-set statusline+=%#Visual# " white
-set statusline+=\|
 
 " set linebreak to 100 chars
 set textwidth=100
@@ -218,9 +240,9 @@ function! Ms(mode)
     "set touchpad (mode=enable/disable)
     if g:toggleTouch
         let l:touch_id_command = '$(xinput list | grep -i touchpad | sed -nE "s/^.+id=([0-9]+).+$/\1/p")'
-        let job = job_start(["/bin/sh", "-c", "xinput --" . a:mode . " " . touch_id_command],
-                            \ {"in_io": "null", "out_io": "null", "err_io": "null",
-                            \  "in_mode": "raw", "out_mode": "raw", "err_mode": "raw"})
+        let g:ms_job = job_start(["/bin/sh", "-c", "xinput --" . a:mode . " " . touch_id_command],
+                               \ {"in_io": "null", "out_io": "null", "err_io": "null",
+                               \  "in_mode": "raw", "out_mode": "raw", "err_mode": "raw"})
     endif
 endfunction
 
@@ -541,7 +563,7 @@ nnoremap <leader>hs :call ToggleHeaderSource("split")<CR>
 
 " map ctrl+md to show markdown
 function! ShowFile()
-    execute "!(google-chrome " . expand('%') . ")"
+    execute "!(firefox " . expand('%') . ")"
 endfunction
 cmap md :call ShowFile()<CR>
 
