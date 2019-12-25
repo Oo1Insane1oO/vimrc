@@ -78,8 +78,8 @@ function! StatuslineGit()
 endfunction
 
 function! ReducedCWD()
-    let l:curr_dir = split(substitute(getcwd(), $HOME, 'ℍ', ''), '/\zs')
-    return l:curr_dir[0] . join(map(l:curr_dir[1:], {_, val -> val[0]}))
+    let l:curr_dir = split(substitute(getcwd(), $HOME, '~', ''), '/')
+    return join(map(l:curr_dir[:-2], {_, val -> val[0]}), '/') . '/' . l:curr_dir[-1]
 endfunction
 
 function! CheckModified()
@@ -95,17 +95,6 @@ endfunction
 function! GetTouchToggleStatus()
     return g:toggleTouch && job_info(g:ms_job)["exitval"] == 0 ? "\u211A\u0338" : "\u211A" 
 endfunction
-
-let g:currentmode={
-       \ 'n'  : 'NORMAL ',
-       \ 'v'  : 'VISUAL ',
-       \ 'V'  : 'V·Line ',
-       \ '' : 'V·Block ',
-       \ 'i'  : 'INSERT ',
-       \ 'R'  : 'R ',
-       \ 'Rv' : 'V·Replace ',
-       \ 'c'  : 'Command ',
-       \}
 
 " custom colors
 hi User1 ctermbg=239 ctermfg=167
@@ -130,7 +119,7 @@ set statusline+=%#DiffDelete# " red
 set statusline+=%{CheckModified()}
 
 set statusline+=%2* " blue
-set statusline+=\ %{toupper(g:currentmode[mode()])}
+set statusline+=\ %{toupper(mode())}
 
 set statusline+=%#WildMenu# " blue/grey
 set statusline+=
