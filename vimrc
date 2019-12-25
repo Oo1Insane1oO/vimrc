@@ -96,6 +96,41 @@ function! GetTouchToggleStatus()
     return g:toggleTouch && job_info(g:ms_job)["exitval"] == 0 ? "\u211A\u0338" : "\u211A" 
 endfunction
 
+function! GetFullMode()
+    let l:mode_names = {
+    \   'n': 'NORMAL',
+    \   'no': 'PENDING',
+    \   'nov': 'PENDING CHAR',
+    \   'noV': 'PENDING LINE',
+    \   'no': 'PENDING BLOCK',
+    \   'niI': 'INSERT',
+    \   'niR': 'REPLACE',
+    \   'niV': 'VIRTUAL REPLACE',
+    \   'v': 'VISUAL',
+    \   'V': 'VISUAL',
+    \   '': 'VISUAL BLOCK',
+    \   's': 'SELECT CHAR',
+    \   'S': 'SELECT LINE',
+    \   'CTRL-S': '',
+    \   'i': 'INSERT',
+    \   'ic': 'COMPLETION INSERT',
+    \   'ix': 'INSERT COMPLETION',
+    \   'R': 'REPLACE',
+    \   'Rc': 'REPLACE COMPLETION',
+    \   'Rv': 'VIRTUAL REPLACE',
+    \   'Rx': 'REPLACE COMPLETION',
+    \   'c': 'COMMAND LINE EDIT',
+    \   'cv': 'EX',
+    \   'ce': 'NORMAL EX',
+    \   'r': 'END PROMPT',
+    \   'rm': 'MORE PROMPT',
+    \   'r?': 'CONFIRM PROMPT',
+    \   '!': 'EXTERNAL',
+    \   't': 'TERMINAL',
+    \}
+    return l:mode_names[mode()]
+endfunction
+
 " custom colors
 hi User1 ctermbg=239 ctermfg=167
 hi User2 ctermbg=109 ctermfg=234
@@ -119,7 +154,7 @@ set statusline+=%#DiffDelete# " red
 set statusline+=%{CheckModified()}
 
 set statusline+=%2* " blue
-set statusline+=\ %{toupper(mode())}
+set statusline+=\ %{GetFullMode()}
 
 set statusline+=%#WildMenu# " blue/grey
 set statusline+=
