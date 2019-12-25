@@ -3,12 +3,13 @@
 [fetch]
     prune = true
 [core]
-    editor = vim 
+    editor = vim --cmd
     excludesfile = ~/.gitignore
     autocrlf = input
     filemode = false
 [alias]
-    ll = log --pretty=format:"%C(#5d93df)%h%Creset\\ %C(#40bf40)%ar%C(#25e4e4)%d\\ %Creset%s%C(#dcdc4c)\\ [%cn]" --graph --decorate --all
+    #ll = log --pretty=format:"%C(#5d93df)%h%Creset\\ %C(#40bf40)%ar%C(#25e4e4)%d\\ %Creset%s%C(#dcdc4c)\\ [%cn]" --graph --decorate --all
+    ll = log --graph --decorate --all --pretty=format:"%C(blue)%h\\ %C(cyan)%ar%C(green)%d\\ %C(reset)%s%C(yellow)\\ [%cn]"
     edit = "!vim `git ls-files -m | uniq` -c '/\\v^[<=>|]{7}( |$)'"
     add-all = "!git add `git ls-files -m | uniq`"
     accept-ours = "!f() { git checkout --ours -- \"${@:-.}\"; git add -u \"${@:-.}\"; }; f"
@@ -17,7 +18,7 @@
 [color]
     ui = auto
 [color "branch"]
-    current = yellow
+    current = cyan 
     local = yellow
     remote = green
 [color "diff"]
@@ -27,9 +28,9 @@
     new = green bold
 [color "status"]
     untracked = dim
-    added = green
+    added = cyan
     deleted = yellow
-    changed = cyan
+    changed = green
 [diff]
     tool = vimdiff
 [pull]
