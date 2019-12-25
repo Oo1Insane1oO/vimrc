@@ -10,7 +10,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'morhetz/gruvbox'
 Plug 'wellle/targets.vim'
 Plug 'w0rp/ale'
-Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/rainbow_parentheses.vim', {'for': ['clojure', 'scheme', 'racket']}
 
 call plug#end()
 
