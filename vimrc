@@ -78,15 +78,20 @@ function! StatuslineGit()
 endfunction
 
 function! ReducedCWD()
-    let l:curr_dir = split(substitute(getcwd(), $HOME, '~', ''), '/')
+    let l:curr_dir = substitute(getcwd(), $HOME, '~', '')
+    if l:curr_dir == "~"
+        return l:curr_dir . "/"
+    endif
+
+    let l:curr_dir = split(l:curr_dir, '/')
     return join(map(l:curr_dir[:-2], {_, val -> val[0]}), '/') . '/' . l:curr_dir[-1]
 endfunction
 
 function! CheckModified()
     if !&modifiable
-        return ''
+        return '⎮⎮'
     elseif &modified
-        return '✚'
+        return '⎮+⎮'
     else
         return ''
     endif
@@ -133,9 +138,14 @@ endfunction
 
 " custom colors
 hi User1 ctermbg=239 ctermfg=167
-hi User2 ctermbg=109 ctermfg=234
-hi User3 ctermbg=24 ctermfg=234
-hi User4 ctermbg=66 ctermfg=234
+hi User2 ctermbg=109 ctermfg=237 cterm=bold
+hi User3 ctermbg=24 ctermfg=237 cterm=bold
+hi User4 ctermbg=66 ctermfg=237 cterm=bold
+hi User5 ctermbg=167 ctermfg=237 cterm=bold
+hi User6 ctermbg=208 ctermfg=237 cterm=bold
+hi User7 ctermbg=214 ctermfg=237 cterm=bold
+hi User8 ctermbg=142 ctermfg=237 cterm=bold
+hi User9 ctermbg=108 ctermfg=237 cterm=bold
 
 " statusline settings
 set laststatus=2
@@ -150,35 +160,35 @@ set statusline+=%4* " blue2 / grey
 set statusline+=\ %f
 set statusline+=\ 
 
-set statusline+=%#DiffDelete# " red
+set statusline+=%5* " red
 set statusline+=%{CheckModified()}
 
 set statusline+=%2* " blue
 set statusline+=\ %{GetFullMode()}
 
-set statusline+=%#WildMenu# " blue/grey
+set statusline+=\ %#WildMenu# " blue/grey
 set statusline+=
 set statusline+=%=
 set statusline+=%1* " grey/red
 set statusline+=
 
-set statusline+=%#DiffDelete# " red
-set statusline+=\ %p%%\|%l:%c\|%LΞ
+set statusline+=%5* " red
+set statusline+=\ %p%%⎮%l:%c⎮%LΞ
 set statusline+=\ 
 
-set statusline+=%#IncSearch# " orange
+set statusline+=%6* " orange
 set statusline+=\ %{GetTouchToggleStatus()}
 set statusline+=\ 
 
-set statusline+=%#DiffText# " yellow
-set statusline+=\ \[%{ReducedCWD()}\]
+set statusline+=%7* " yellow
+set statusline+=\ %{ReducedCWD()}
 set statusline+=\ 
 
-set statusline+=%#DiffAdd# " green
+set statusline+=%8* " green
 set statusline+=\ %y
 set statusline+=\ 
 
-set statusline+=%#DiffChange# " teal
+set statusline+=%9* " teal
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\ 
 
@@ -364,6 +374,10 @@ nnoremap <Space>t :TagbarOpen fj<CR>
 
 " set paste-toggle to leader(backslash)-z
 set pastetoggle=<leader>z
+
+" dont show mode or cmd in last line
+set noshowmode
+set noshowcmd
 
 " use ctrl+h/l to switch between tabs
 nnoremap <C-o> gT
