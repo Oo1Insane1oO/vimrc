@@ -101,6 +101,36 @@ function! GetTouchToggleStatus()
     return g:toggleTouch && job_info(g:ms_job)["exitval"] == 0 ? "\u211A\u0338" : "\u211A" 
 endfunction
 
+function! CheckBufferString()
+    let l:curr_buffer_nr = bufnr("%")
+
+    if ale#engine#IsCheckingBuffer(l:curr_buffer_nr)
+        return "⋅⋅⋅"
+    endif
+
+    let l:error_dict = ale#statusline#FirstProblem(l:curr_buffer_nr, "error")
+    if !empty(l:error_dict)
+        return l:error_dict . "⚔"
+    endif
+    
+    let l:error_dict = ale#statusline#FirstProblem(l:curr_buffer_nr, "style_error")
+    if !empty(l:error_dict)
+        return l:error_dict . "⚠"
+    endif
+    
+    let l:error_dict = ale#statusline#FirstProblem(l:curr_buffer_nr, "style_warning")
+    if !empty(l:error_dict)
+        return l:error_dict . "†"
+    endif
+    
+    let l:error_dict = ale#statusline#FirstProblem(l:curr_buffer_nr, "info")
+    if !empty(l:error_dict)
+        return l:error_dict . "⸘"
+    endif
+
+    return "✔"
+endfunction
+
 function! GetFullMode()
     let l:mode_names = {
     \   'n': 'NORMAL',
@@ -177,7 +207,7 @@ set statusline+=\ %p%%⎮%l:%c⎮%LΞ
 set statusline+=\ 
 
 set statusline+=%6* " orange
-set statusline+=\ %{GetTouchToggleStatus()}
+set statusline+=\ %{CheckBufferString()}
 set statusline+=\ 
 
 set statusline+=%7* " yellow
@@ -188,8 +218,11 @@ set statusline+=%8* " green
 set statusline+=\ %y
 set statusline+=\ 
 
-set statusline+=%9* " teal
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+" set statusline+=%9* " teal
+" set statusline+=\ 
+
+set statusline+=%3* " blue
+set statusline+=\ %{GetTouchToggleStatus()}
 set statusline+=\ 
 
 " set linebreak to 100 chars
