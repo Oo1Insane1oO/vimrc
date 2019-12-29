@@ -110,25 +110,25 @@ function! CheckBufferString()
 
     let l:error_dict = ale#statusline#FirstProblem(l:curr_buffer_nr, "error")
     if !empty(l:error_dict)
-        return l:error_dict . "⚔"
+        return " " . l:error_dict["text"] . " [⚔] "
     endif
     
     let l:error_dict = ale#statusline#FirstProblem(l:curr_buffer_nr, "style_error")
     if !empty(l:error_dict)
-        return l:error_dict . "⚠"
+        return " " . l:error_dict["text"] .  " [⚠] "
     endif
     
     let l:error_dict = ale#statusline#FirstProblem(l:curr_buffer_nr, "style_warning")
     if !empty(l:error_dict)
-        return l:error_dict . "†"
+        return " " . l:error_dict["text"] . " [†] "
     endif
     
     let l:error_dict = ale#statusline#FirstProblem(l:curr_buffer_nr, "info")
     if !empty(l:error_dict)
-        return l:error_dict . "⸘"
+        return " " . l:error_dict["text"] . " [⸘] "
     endif
 
-    return "✔"
+    return "[✔]"
 endfunction
 
 function! GetFullMode()
@@ -207,8 +207,7 @@ set statusline+=\ %p%%⎮%l:%c⎮%LΞ
 set statusline+=\ 
 
 set statusline+=%6* " orange
-set statusline+=\ %{CheckBufferString()}
-set statusline+=\ 
+set statusline+=%{CheckBufferString()}
 
 set statusline+=%7* " yellow
 set statusline+=\ %{ReducedCWD()}
