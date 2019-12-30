@@ -3,7 +3,7 @@
 [fetch]
     prune = true
 [core]
-    editor = vim --cmd
+    editor = vim
     excludesfile = ~/.gitignore
     autocrlf = input
     filemode = false
@@ -47,3 +47,6 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[user]
+	email = Oo1Insane1oO@users.noreply.github.com
+	name = alocias
