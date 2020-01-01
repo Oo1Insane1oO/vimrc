@@ -177,6 +177,10 @@ hi User7 ctermbg=214 ctermfg=237 cterm=bold
 hi User8 ctermbg=142 ctermfg=237 cterm=bold
 hi User9 ctermbg=108 ctermfg=237 cterm=bold
 
+hi TabLine ctermfg=214 ctermbg=237 cterm=bold term=none
+hi TabLineFill ctermfg=237 ctermbg=237 cterm=bold term=none
+hi TabLineSel ctermfg=237 ctermbg=109 cterm=bold term=none
+
 " statusline settings
 set laststatus=2
 
@@ -382,11 +386,6 @@ let &undodir=g:undoDir
 silent set backup
 silent set directory
 silent set undofile
-
-" Set color of tab bar
-hi TabLineFill ctermfg=Black ctermbg=DarkGreen
-hi TabLine ctermfg=Grey ctermbg=Black
-hi TabLineSel ctermfg=DarkCyan ctermbg=DarkRed
 
 " use tt to toggle tagbar
 nmap <Space><Space> :TagbarToggle<CR>
