@@ -264,6 +264,9 @@ augroup END
 set ignorecase
 set smartcase
 
+" Allow recursive search in cwd
+set path+=**
+
 " Allow backspace over autoindent
 set backspace=indent,eol,start
 
@@ -292,9 +295,12 @@ set ttyfast
 set clipboard+=unnamed
 set go+=a
 
-"  open new splits to right and bottom
+" open new splits to right and bottom
 set splitright
 set splitbelow
+
+" make git ctags git hook works
+set tags^=./.git/tags;
 
 " fix slow tagbar
 augroup filetype_tagbar
